@@ -51,8 +51,15 @@
 	<script id="templates/hello.html" type="text/ng-template">
 		<ion-view view-title="hello">
 		<ion-content class="padding"> 
-		<h1>Hello {{user.userId}}</h1>		  
-		  <button class="button button-block" ng-click="logout()">Log Out</button>
+		<h1>Hello {{user.userId}}</h1>	
+			<ion-list>
+			<ion-item > Hospitals </ion-item>
+			<ion-item ng-repeat="hospital in hospitals">
+			{{hospital.InstallId}} - {{hospital.HospitalName}}
+			</ion-item>
+			</ion-list>		
+           <button class="button button-block button-stable" ng-click="getHospitals()">Get Hospitals</button>		
+		  <button class="button button-block button-assertive" ng-click="logout()">Log Out</button>
 		</ion-content>
 		</ion-view>
 	</script>

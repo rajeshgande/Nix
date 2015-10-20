@@ -18,11 +18,19 @@ angular.module('nix', ['ionic'])
  };
 })
 
-.controller('HelloCtrl', function($scope, $state,formData) {
+.controller('HelloCtrl', function($scope, $state, $http,formData) {
 	$scope.user = formData.getForm();
 	$scope.logout = function() {
 		 console.log("Logging Out ", $scope.user);
 		 $state.go('login');		 
+	};
+	$scope.getHospitals = function() {
+		 console.log("Getting Hospitals ");		 
+		 $http.get('http://10.6.223.25:40405/System/GetHospitals')
+			   .then(function (response) {				 
+				 console.log('Get Hospitals', response);
+				 $scope.hospitals = response.data;
+			   });		 
 	};
 })
 
