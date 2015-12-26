@@ -96,7 +96,7 @@ angular.module('nix', ['ionic'])
 					});
        }
 
-       var tokenClaims = getClaimsFromToken();
+       var tokenClaims = '';//getClaimsFromToken();
 	   
        return {
            signup: function (data, success, error) {
@@ -111,6 +111,7 @@ angular.module('nix', ['ionic'])
                success();
            },
            getTokenClaims: function () {
+			   tokenClaims = getClaimsFromToken();
                return tokenClaims;
            },
 			getLoggedInUser : function(){				
