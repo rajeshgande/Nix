@@ -23,13 +23,13 @@
   </head>
   <body ng-app="nix">
 
- <ion-nav-bar class="bar-positive">  
-</ion-nav-bar>
-
+ <ion-nav-bar class="bar-positive nav-title-slide-ios7">
+    <ion-nav-back-button class="button-clear">
+      <i class="ion-arrow-left-c"></i> Back
+    </ion-nav-back-button>	
+  </ion-nav-bar>
 <ion-nav-view>
-</ion-nav-view>
-
-	
+</ion-nav-view>	
 	<script id="templates/login.html" type="text/ng-template">
 		<ion-view view-title="LogIn">
 		<ion-content class="padding"> 		
@@ -49,17 +49,40 @@
 	</script>
 	
 	<script id="templates/landing.html" type="text/ng-template">
-		<ion-view view-title="hello">
+		<ion-view view-title="Select A CP">
 		<ion-content class="padding"> 
-		<h1>Hello {{user.userName}}</h1>	
+		<h3>Hello {{user.userName}}</h3>	
 		<ion-list>
-			<ion-item > Hospitals </ion-item>
-			<ion-item ng-repeat="hospital in hospitals">
-			{{hospital.InstallId}} - {{hospital.HospitalName}}
-			</ion-item>
-		</ion-list>		
-           <button class="button button-block button-stable" ng-click="getHospitals()">Get Hospitals</button>		
+			<!-- <ion-item > Select A CP </ion-item> -->
+			<!-- <ion-item ng-repeat="cp in cps"> -->
+			<a class="item" item-icon-right ng-repeat="cp in cps" href="#" ng-click="gotoItemEntry()">  
+				{{cp.OmniName}}
+			</a>			
+			<!-- </ion-item> -->
+		</ion-list>		          
 		   <button class="button button-block button-assertive" ng-click="logout()">Log Out</button>
+		</ion-content>
+		</ion-view>
+	</script>
+	
+	<script id="templates/itementry.html" type="text/ng-template">
+		<ion-view view-title="{{headerText}}">				
+		<ion-content class="padding"> 		
+		<form ng-submit="submitForm(item)">
+		 <ion-list>
+		   <ion-item class="item-input">
+			 <input type="text" ng-model="item.ItemId" placeholder="Item Id">
+		   </ion-item>
+		    <!-- <ion-item class="item-input">
+			 <input type="text" ng-model="item.Name" placeholder="Item Name">
+		   </ion-item> -->
+		   <ion-item class="item-input">
+			 <input type="text" ng-model="item.Quantity" placeholder="Quantity">
+		   </ion-item>		  
+		   <input type="submit" class="button button-block button-balanced" value="Update Quanity">
+		   <!-- <button class="button button-block button-assertive" ng-click="gotoCPList()">Go To CP List</button> -->
+		 </ion-list>
+		</form>
 		</ion-content>
 		</ion-view>
 	</script>

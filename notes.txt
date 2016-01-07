@@ -1,0 +1,22 @@
+
+
+Yes, I see that your device has an update to 5.1.1, Lollipop (T337AUCU2BOH4)
+
+set PATH=%PATH%;C:\Program Files\Java\jdk1.7.0_79\bin;
+
+set PATH=%PATH%;C:\Users\rajeshg\AppData\Local\Android\sdk1\build-tools\23.0.1
+
+C:\Users\rajeshg\AppData\Local\Android\sdk1\platform-tools\adb devices
+
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore nix-release-unsigned.apk alias_name
+
+C:\Users\rajeshg\AppData\Local\Android\sdk1\build-tools\23.0.1\zipalign -v 4 nix-release-unsigned.apk nix.apk
+
+
+
+steps to publish
+
+cordova plugin rm cordova-plugin-console
+cordova build --release android
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore C:\Work\Projects\Nix_Docs\my-release-key.keystore C:\Work\Projects\Nix\platforms\android\build\outputs\apk\android-release-unsigned.apk alias_name
+C:\Users\rajeshg\AppData\Local\Android\sdk1\build-tools\23.0.1\zipalign -v 4 C:\Work\Projects\Nix\platforms\android\build\outputs\apk\android-release-unsigned.apk C:\Work\Projects\Nix_Docs\nixv3.apk

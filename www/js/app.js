@@ -5,7 +5,8 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('nix', ['ionic'])
  .constant('urls', {
-       BASE: 'http://localhost:40405/',      
+      // BASE: 'http://10.6.47.41:40405/', 
+       BASE: 'http://localhost:40405/', 
 	   TOKEN_REQUEST: '/oauth/token'
    })
 .controller('LogInCtrl', function($scope, $state, $http, formData, auth) {
@@ -25,19 +26,44 @@ angular.module('nix', ['ionic'])
  };
 })
 
-.controller('LandingCtrl', function($scope, $state, auth, httpService) {
+.controller('LandingCtrl', function($scope, $state, httpService, auth) {
+	
 	$scope.user = auth.getLoggedInUser();
-	$scope.hospitals = httpService.getHospitals();
+	
+	httpService.getAllCPs().then(function(data) {
+		  $scope.cps=data;
+		});
+		
 	console.log($scope.hospitals);
-	$scope.getHospitals = function()
-	{
-		$scope.hospitals = httpService.getHospitals();
-		console.log("hospitals ", $scope.hospitals);
-	}	
+	
 	$scope.logout = function() {
 		 console.log("Logging Out ", $scope.user);
-		 auth.logout( function(){$state.go('login')});
+		 auth.logout( function(){$state.go('login')});	
 	};
+	
+	 $scope.gotoItemEntry = function() {		
+		$state.go('itementry');
+	};
+})
+
+.controller('ItemEntryCtrl', function($scope, $state, formData, httpService) {
+	
+	 $scope.item = {};
+	
+	$scope.headerText = 'Enter Cycle Count';
+	$scope.CP = 'abcd';
+	
+	$scope.gotoCPList = function() {
+		 $state.go('landing');
+	};	
+		 
+    $scope.submitForm = function(item) {	
+	
+		 formData.updateForm(item);	 
+		 
+		 httpService.updateQty(item);	
+	  
+	 };
 	
 })
 
@@ -84,7 +110,10 @@ angular.module('nix', ['ionic'])
             $http({
 						method: 'POST',
 						url: urls.BASE + urls.TOKEN_REQUEST,
-						headers: {'OCClientContext': '{   "ProductName" : "CP",   "PartnerProductId" : "",   "OmniCenterInstallation" : "CPC01",   "TimeStamp" : "06/26/2015 19:40:05"  }', 'Content-Type': 'application/x-www-form-urlencoded'},
+						headers: {
+							'OCClientContext': '{   "ProductName" : "CP",   "PartnerProductId" : "",   "OmniCenterInstallation" : "CPC01",   "TimeStamp" : "06/26/2016 19:40:05"  }', 
+						'Content-Type': 'application/x-www-form-urlencoded'
+						},
 						data: 'UserName='+ encodeURIComponent(loggindata.userId)+'&Password='+ encodeURIComponent(loggindata.password) + '&grant_type=password'
 							}).then(function successCallback(response) {
 								console.log(response.data)
@@ -92,7 +121,9 @@ angular.module('nix', ['ionic'])
 								console.log(getClaimsFromToken())
 								success();
 						},
-							function errorCallback(response) {console.log(response.data)
+							function errorCallback(response) {
+								alert('error logging in...'+response.data)
+								console.log(response.data)
 					});
        }
 
@@ -114,28 +145,88 @@ angular.module('nix', ['ionic'])
 			   tokenClaims = getClaimsFromToken();
                return tokenClaims;
            },
-			getLoggedInUser : function(){				
+			getLoggedInUser : function(){		
+				tokenClaims = getClaimsFromToken();			
 				return { userId : tokenClaims.Omnicell_UserId, userName : tokenClaims.Omnicell_UserName};
 			}		   
        };
    })
 .service('httpService', function($http, urls) {
-	 function getHospitals() {
+	 
+	 function gethospitals() {
 		 console.log("Getting Hospitals ");	
 		 var hospitals = {};
-		 $http.get( urls.BASE + '/System/GetHospitals')
-			   .then(function (response) {				 
+		 
+		 var getHospitalsurl = urls.BASE + '/System/GetHospitals';
+		hospitals = $http({
+			  method: 'GET',
+			  url: getHospitalsurl
+			}).then(function successCallback(response) {
 				 console.log('Get Hospitals', response.data);
-				 hospitals =  response.data;				 
-			   });		
-         return hospitals;   
+				 return response.data;		
+			  }, function errorCallback(response) {
+				console.log('Error Geting Hospitals...' + response.data);
+				alert('Error Geting Hospitals' + response.data);
+				return {};
+			  });
+			  
+		return hospitals;   
+	};
+	
+	function getcps() {
+		 console.log("Getting CPS ");	
+		 var cps = {};
+		 
+		 var cpurl = urls.BASE + '/System/GetAllCPs';
+		cps = $http({
+			  method: 'GET',
+			  url: cpurl,
+			  headers: {
+						'OCClientContext': '{   "ProductName" : "CP",   "PartnerProductId" : "",   "OmniCenterInstallation" : "CPC01",   "TimeStamp" : "06/26/2016 19:40:05"  }', 
+						'Content-Type': 'application/json'
+						},
+			}).then(function successCallback(response) {
+				 console.log('Get CPs', response.data);
+				 return response.data;		
+			  }, function errorCallback(response) {
+				console.log('Error Getting CPs...' + response.data);
+				alert('Error Getting CPs' + response.data);
+				return {};
+			  });
+			  
+		return cps;   
+	};
+	
+	  function updateQty(item) {
+		  var updateqtyURl = urls.BASE + '/System/UpdateQuantity?itemId='+ item.itemId +'&quantity='+ item.Quantity;
+            $http({
+						method: 'POST',
+						url: updateqtyURl,
+						headers: {
+							'OCClientContext': '{   "ProductName" : "CP",   "PartnerProductId" : "",   "OmniCenterInstallation" : "CPC01",   "TimeStamp" : "06/26/2016 19:40:05"  }', 
+						'Content-Type': 'application/json'
+						},
+						
+						data: '{itemId:"'+ item.ItemId+'",quantity:"'+ item.Quantity +'"}'						
+							}).then(function successCallback(response) {								
+						},
+							function errorCallback(response) {
+								alert('error updating item quantity...' + response.data)
+								console.log(response.data)
+					});
 	};
 	
 	return {
            getHospitals: function (data, success, error) {
-               return getHospitals();
+               return gethospitals();
 			},
-	};
+			getAllCPs: function (data, success, error) {
+               return getcps();
+			},
+			updateQty: function (item) {
+               return updateQty(item);
+			}	
+	}
 })
 
 .config(function($stateProvider, $urlRouterProvider){
@@ -149,6 +240,11 @@ angular.module('nix', ['ionic'])
    url: "/landing",
    templateUrl: "templates/landing.html",
    controller: 'LandingCtrl'
+ })
+ .state('itementry', {
+   url: "/itementry",
+   templateUrl: "templates/itementry.html",
+   controller: 'ItemEntryCtrl'
  })
  $urlRouterProvider.otherwise('login');
 });
