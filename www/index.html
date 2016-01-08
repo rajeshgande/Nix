@@ -40,7 +40,10 @@
 		   </ion-item>
 		   <ion-item class="item-input">
 			 <input type="text" ng-model="user.password" placeholder="Password">
-		   </ion-item>		  
+		   </ion-item>
+		  <ion-item class="item-input">
+			 <input type="text" ng-model="ServerAddress" placeholder="ServerAddress">
+		   </ion-item>			   
 		   <input type="submit" class="button button-block button-balanced" value="Log In">
 		 </ion-list>
 		</form>
@@ -58,6 +61,7 @@
 			<a class="item" item-icon-right ng-repeat="cp in cps" href="#" ng-click="gotoItemEntry()">  
 				{{cp.OmniName}}
 			</a>			
+			
 			<!-- </ion-item> -->
 		</ion-list>		          
 		   <button class="button button-block button-assertive" ng-click="logout()">Log Out</button>

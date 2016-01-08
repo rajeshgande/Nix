@@ -5,25 +5,40 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('nix', ['ionic'])
  .constant('urls', {
-      // BASE: 'http://10.6.47.41:40405/', 
-       BASE: 'http://localhost:40405/', 
+       BASE: 'http://10.6.47.16:40405/', 
+      // BASE: 'http://localhost:40405/', 
 	   TOKEN_REQUEST: '/oauth/token'
    })
 .controller('LogInCtrl', function($scope, $state, $http, formData, auth) {
- $scope.user = {};
-	
- $scope.submitForm = function(user) {	
-   if (user.userId && user.password) {
-	 formData.updateForm(user);	 
+	$scope.user = {};
+ 
+	if(window.localStorage.getItem("serveraddress") == undefined ) {
+           window.localStorage['serveraddress'] = "localhost"
+		   window.localStorage['baseurl'] = 'http://localhost:40405/';
+        }
+		
+	 $scope.ServerAddress = window.localStorage['serveraddress'];
+	 window.localStorage['baseurl'] = 'http://' + $scope.ServerAddress + ':40405/';
 	 
-	 auth.login(user, function(){ $state.go('landing');});
-	
-     console.log("Logging In ", user);
-	
-   } else {
-     alert("Please enter user name and password");
-   }
- };
+	 
+	 $scope.submitForm = function(user) {	
+	   if (user.userId && user.password) {
+		   
+		 window.localStorage['serveraddress'] = $scope.ServerAddress;
+		 window.localStorage['baseurl'] = 'http://' + $scope.ServerAddress + ':40405/';
+		  
+		 formData.updateForm(user);	 
+		 
+		 auth.login(user, function(){ $state.go('landing');});
+		
+		 console.log("Logging In ", user);
+		 
+		 
+		
+	   } else {
+		 alert("Please enter user name and password");
+	   }
+	 };
 })
 
 .controller('LandingCtrl', function($scope, $state, httpService, auth) {
@@ -109,7 +124,7 @@ angular.module('nix', ['ionic'])
 	   function loginuser(loggindata, success) {
             $http({
 						method: 'POST',
-						url: urls.BASE + urls.TOKEN_REQUEST,
+						url: window.localStorage.getItem("baseurl")  + urls.TOKEN_REQUEST,
 						headers: {
 							'OCClientContext': '{   "ProductName" : "CP",   "PartnerProductId" : "",   "OmniCenterInstallation" : "CPC01",   "TimeStamp" : "06/26/2016 19:40:05"  }', 
 						'Content-Type': 'application/x-www-form-urlencoded'
@@ -131,7 +146,7 @@ angular.module('nix', ['ionic'])
 	   
        return {
            signup: function (data, success, error) {
-               $http.post(urls.BASE + '/signup', data).success(success).error(error)
+               $http.post(window.localStorage.getItem("baseurl") + '/signup', data).success(success).error(error)
            },
            login: function (loggindata, success, error) {
                  loginuser(loggindata, success);
@@ -157,7 +172,7 @@ angular.module('nix', ['ionic'])
 		 console.log("Getting Hospitals ");	
 		 var hospitals = {};
 		 
-		 var getHospitalsurl = urls.BASE + '/System/GetHospitals';
+		 var getHospitalsurl = window.localStorage.getItem("baseurl") + '/System/GetHospitals';
 		hospitals = $http({
 			  method: 'GET',
 			  url: getHospitalsurl
@@ -177,7 +192,7 @@ angular.module('nix', ['ionic'])
 		 console.log("Getting CPS ");	
 		 var cps = {};
 		 
-		 var cpurl = urls.BASE + '/System/GetAllCPs';
+		 var cpurl = window.localStorage.getItem("baseurl") + '/System/GetAllCPs';
 		cps = $http({
 			  method: 'GET',
 			  url: cpurl,
@@ -198,7 +213,7 @@ angular.module('nix', ['ionic'])
 	};
 	
 	  function updateQty(item) {
-		  var updateqtyURl = urls.BASE + '/System/UpdateQuantity?itemId='+ item.itemId +'&quantity='+ item.Quantity;
+		  var updateqtyURl = window.localStorage.getItem("baseurl")  + '/System/UpdateQuantity?itemId='+ item.itemId +'&quantity='+ item.Quantity;
             $http({
 						method: 'POST',
 						url: updateqtyURl,
@@ -208,7 +223,8 @@ angular.module('nix', ['ionic'])
 						},
 						
 						data: '{itemId:"'+ item.ItemId+'",quantity:"'+ item.Quantity +'"}'						
-							}).then(function successCallback(response) {								
+							}).then(function successCallback(response) {	
+							alert('Item: ' + item.ItemId+ '\'s quantity updated to ' + item.Quantity )
 						},
 							function errorCallback(response) {
 								alert('error updating item quantity...' + response.data)
