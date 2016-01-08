@@ -13,21 +13,20 @@ angular.module('nix', ['ionic'])
 	$scope.user = {};
  
 	if(window.localStorage.getItem("serveraddress") == undefined ) {
-           window.localStorage['serveraddress'] = "localhost"
-		   window.localStorage['baseurl'] = 'http://localhost:40405/';
+          $scope.user.ServerAddress =  localhost;
         }
-		
-	 $scope.ServerAddress = window.localStorage['serveraddress'];
-	 window.localStorage['baseurl'] = 'http://' + $scope.ServerAddress + ':40405/';
-	 
+	else{
+		$scope.user.ServerAddress = window.localStorage.getItem("serveraddress");
+	}				
+	
 	 
 	 $scope.submitForm = function(user) {	
 	   if (user.userId && user.password) {
-		   
-		 window.localStorage['serveraddress'] = $scope.ServerAddress;
-		 window.localStorage['baseurl'] = 'http://' + $scope.ServerAddress + ':40405/';
-		  
-		 formData.updateForm(user);	 
+	    
+		window.localStorage.setItem('serveraddress', $scope.user.ServerAddress);
+		window.localStorage.setItem("baseurl", 'http://' + $scope.user.ServerAddress + ':40405/');	
+		
+        formData.updateForm(user);	 
 		 
 		 auth.login(user, function(){ $state.go('landing');});
 		
@@ -137,7 +136,7 @@ angular.module('nix', ['ionic'])
 								success();
 						},
 							function errorCallback(response) {
-								alert('error logging in...'+response.data)
+								alert('error logging in...'+ response.data + ' serveraddress : ' + window.localStorage.getItem("baseurl") )
 								console.log(response.data)
 					});
        }
