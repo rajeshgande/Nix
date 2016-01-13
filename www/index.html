@@ -18,6 +18,8 @@
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
+   <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+
     <!-- your app's js -->
     <script src="js/app.js"></script>
   </head>
@@ -44,9 +46,10 @@
 		  <ion-item class="item-input">
 			 <input type="text" ng-model="user.ServerAddress" placeholder="ServerAddress">
 		   </ion-item>			   
-		   <input type="submit" class="button button-block button-balanced" value="Log In">
+		   <input type="submit" class="button button-block button-balanced" value="Log In">		   
 		 </ion-list>
 		</form>
+		 <button class="button button-block button-positive" ng-click="goToItemEntry()">Item Entry</button>
 		</ion-content>
 		</ion-view>
 	</script>
@@ -72,19 +75,26 @@
 	<script id="templates/itementry.html" type="text/ng-template">
 		<ion-view view-title="{{headerText}}">				
 		<ion-content class="padding"> 		
-		<form ng-submit="submitForm(item)">
+		
 		 <ion-list>
+		  <ion-item class="item">
+		   <button class="button button-block button-positive">
+            <i class="icon ion-qr-scanner"></i>
+            Scan Barcode
+            </button>
+		  </ion-item>
+		   <ion-item class="item">
+		     <div class="item item-divider">Scan Results</div>
+        <div class="item item-text-wrap">{{vm.scanResults}} </div>
+		   </ion-item>
+           <form ng-submit="submitForm(item)">
 		   <ion-item class="item-input">
 			 <input type="text" ng-model="item.ItemId" placeholder="Item Id">
-		   </ion-item>
-		    <!-- <ion-item class="item-input">
-			 <input type="text" ng-model="item.Name" placeholder="Item Name">
-		   </ion-item> -->
+		   </ion-item>		   
 		   <ion-item class="item-input">
 			 <input type="text" ng-model="item.Quantity" placeholder="Quantity">
 		   </ion-item>		  
 		   <input type="submit" class="button button-block button-balanced" value="Update Quanity">
-		   <!-- <button class="button button-block button-assertive" ng-click="gotoCPList()">Go To CP List</button> -->
 		 </ion-list>
 		</form>
 		</ion-content>

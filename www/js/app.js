@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('nix', ['ionic'])
+angular.module('nix', ['ionic','ngCordova'])
  .constant('urls', {
        BASE: 'http://10.6.47.16:40405/', 
       // BASE: 'http://localhost:40405/', 
@@ -19,8 +19,12 @@ angular.module('nix', ['ionic'])
 		$scope.user.ServerAddress = window.localStorage.getItem("serveraddress");
 	}				
 	
+	 $scope.goToItemEntry = function(){
+		 $state.go('itementry');
+	 };
 	 
 	 $scope.submitForm = function(user) {	
+	 
 	   if (user.userId && user.password) {
 	    
 		window.localStorage.setItem('serveraddress', $scope.user.ServerAddress);
@@ -60,8 +64,9 @@ angular.module('nix', ['ionic'])
 	};
 })
 
-.controller('ItemEntryCtrl', function($scope, $state, formData, httpService) {
+.controller('ItemEntryCtrl', function($scope, $state, formData, httpService, $cordovaBarcodeScanner, $ionicPlatform) {
 	
+    var vm = this;
 	 $scope.item = {};
 	
 	$scope.headerText = 'Enter Cycle Count';
@@ -78,6 +83,25 @@ angular.module('nix', ['ionic'])
 		 httpService.updateQty(item);	
 	  
 	 };
+	 
+	 vm.scan = function(){
+        $ionicPlatform.ready(function() {
+            $cordovaBarcodeScanner
+            .scan()
+            .then(function(result) {
+                // Success! Barcode data is here
+                vm.scanResults = "We got a barcoden" +
+                "Result: " + result.text + "n" +
+                "Format: " + result.format + "n" +
+                "Cancelled: " + result.cancelled;
+            }, function(error) {
+                // An error occurred
+                vm.scanResults = 'Error: ' + error;
+            });
+        });
+    };
+    
+    vm.scanResults = '';
 	
 })
 
