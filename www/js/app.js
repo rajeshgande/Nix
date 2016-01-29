@@ -68,7 +68,10 @@ angular.module('nix', ['ionic','ngCordova'])
 	
     var vm = this;
 	 $scope.item = {};
-	
+	 $scope.scan2 = function(){
+          console.log("Logging Out ", $scope.user);
+         alert('abc');
+         };
 	$scope.headerText = 'Enter Cycle Count';
 	$scope.CP = 'abcd';
 	
@@ -83,20 +86,35 @@ angular.module('nix', ['ionic','ngCordova'])
 		 httpService.updateQty(item);	
 	  
 	 };
-	 
-	 vm.scan = function(){
+     
+	 $scope.scan2 = function(){
+          var barcode = "1234";
+          alert('123');
+                 httpService
+                    .getItemDetails(barcode)
+                    .then(function(data) {
+                        $scope.item = data;
+                        });   
+     };
+     
+	 $scope.scan = function(){
         $ionicPlatform.ready(function() {
             $cordovaBarcodeScanner
             .scan()
             .then(function(result) {
-                // Success! Barcode data is here
-                vm.scanResults = "We got a barcoden" +
-                "Result: " + result.text + "n" +
-                "Format: " + result.format + "n" +
-                "Cancelled: " + result.cancelled;
+                 var barcode = result.text
+                
+                 alert(barcode);
+                 console.log("Scanned barcode: " + barcode);
+                
+                 httpService
+                    .getItemDetails(barcode)
+                    .then(function(data) {
+                        $scope.item=data;
+                        });                    
             }, function(error) {
-                // An error occurred
-                vm.scanResults = 'Error: ' + error;
+                alert('Error: ' + error);
+                console.log('Error: ' + error);
             });
         });
     };
@@ -254,6 +272,27 @@ angular.module('nix', ['ionic','ngCordova'])
 								console.log(response.data)
 					});
 	};
+    
+    function getItemDetails(barcode){         
+         return $http({
+						method: 'GET',
+						url:  window.localStorage.getItem("baseurl")  + '/System/GetItemDetails?barcode='+ barcode,
+						headers: {
+							'OCClientContext': '{   "ProductName" : "CP",   "PartnerProductId" : "",   "OmniCenterInstallation" : "CPC01",   "TimeStamp" : "06/26/2016 19:40:05"  }', 
+						    'Content-Type': 'application/json'
+						}
+                        }).then(function successCallback(response) {
+                            var item = 	response.data;
+							console.log('Item Id: ' + item.ItemId + ' itemName ' + item.ItemId )
+                             return item;
+						},
+							function errorCallback(response) {
+                                var errorstr = 'Error getting Item details by barcode.' + response.data;
+								alert(errorstr)
+								console.log(errorstr)
+                                return {};
+					});
+    }
 	
 	return {
            getHospitals: function (data, success, error) {
@@ -264,7 +303,10 @@ angular.module('nix', ['ionic','ngCordova'])
 			},
 			updateQty: function (item) {
                return updateQty(item);
-			}	
+			},
+            getItemDetails: function (barcode) {
+               return getItemDetails(barcode);
+			},	
 	}
 })
 
