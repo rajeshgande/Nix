@@ -25,7 +25,7 @@ angular.module('nix.services')
 		 console.log("Getting CPS ");	
 		 var cps = {};
 		 
-		 var cpurl = window.localStorage.getItem("baseurl") + '/System/GetAllCPs';
+		 var cpurl = window.localStorage.getItem("baseurl") + '/Cp/Cps';
 		cps = $http({
 			  method: 'GET',
 			  url: cpurl,
@@ -46,18 +46,18 @@ angular.module('nix.services')
 	};
 	
 	  function updateQty(item) {
-		  var updateqtyURl = window.localStorage.getItem("baseurl")  + '/System/UpdateQuantity?itemId='+ item.itemId +'&quantity='+ item.Quantity;
+		  var updateqtyURl = window.localStorage.getItem("baseurl")  + '/CpItem/ItemQuantity';
             $http({
 						method: 'POST',
 						url: updateqtyURl,
 						headers: {
 							'OCClientContext': '{   "ProductName" : "CP",   "PartnerProductId" : "",   "OmniCenterInstallation" : "CPC01",   "TimeStamp" : "06/26/2016 19:40:05"  }', 
-						'Content-Type': 'application/json'
+						    'Content-Type': 'application/json'
 						},
 						
 						data: '{itemId:"'+ item.ItemId+'",quantity:"'+ item.Quantity +'"}'						
 							}).then(function successCallback(response) {	
-							alert('Item: ' + item.ItemId+ '\'s quantity updated to ' + item.Quantity )
+							//alert('Item: ' + item.ItemId+ '\'s quantity updated to ' + item.Quantity )
 						},
 							function errorCallback(response) {
 								alert('error updating item quantity...' + response.data)
@@ -68,7 +68,7 @@ angular.module('nix.services')
     function getItemDetails(barcode){         
          return $http({
 						method: 'GET',
-						url:  window.localStorage.getItem("baseurl")  + '/System/GetItemDetails?barcode='+ barcode,
+						url:  window.localStorage.getItem("baseurl")  + '/CpItem/ItemByBarcode?barcode='+ barcode,
 						headers: {
 							'OCClientContext': '{   "ProductName" : "CP",   "PartnerProductId" : "",   "OmniCenterInstallation" : "CPC01",   "TimeStamp" : "06/26/2016 19:40:05"  }', 
 						    'Content-Type': 'application/json'
