@@ -3,17 +3,17 @@ angular.module('nix.routes', [])
   $stateProvider
   .state('login', {
     url: "/login",
-    templateUrl: "templates/login.html",
+    templateUrl: "views/login.html",
     controller: 'LogInCtrl'
   })
 .state('landing', {
    url: "/landing",
-   templateUrl: "templates/landing.html",
+   templateUrl: "views/landing.html",
    controller: 'LandingCtrl'
  })
  .state('itementry', {
    url: "/itementry",
-   templateUrl: "templates/itementry.html",
+   templateUrl: "views/itementry.html",
    controller: 'ItemEntryCtrl'
  })
  $urlRouterProvider.otherwise('login');
