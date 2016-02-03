@@ -1,0 +1,20 @@
+
+<ion-view view-title="LogIn">
+<ion-content class="padding"> 		
+    <form ng-submit="submitForm(user)">
+        <ion-list>
+        <ion-item class="item-input">
+            <input type="text" ng-model="user.userId" placeholder="User Name">
+        </ion-item>
+        <ion-item class="item-input">
+            <input type="text" ng-model="user.password" placeholder="Password">
+        </ion-item>
+        <ion-item class="item-input">
+            <input type="text" ng-model="user.ServerAddress" placeholder="ServerAddress">
+        </ion-item>			   
+        <input type="submit" class="button button-block button-balanced" value="Log In">		   
+        </ion-list>
+    </form>
+    <button class="button button-block button-positive" ng-click="goToItemEntry()">Item Entry</button>
+</ion-content>
+</ion-view>

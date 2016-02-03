@@ -1,0 +1,24 @@
+<ion-view view-title="{{headerText}}">				
+    <ion-content class="padding">
+        <ion-list>
+        <ion-item class="item">
+        <button class="button button-block button-positive" ng-click="scan()">
+        <i class="icon ion-qr-scanner"></i>
+        Scan Barcode
+        </button>
+        </ion-item>		   
+        <form ng-submit="submitForm(item)">
+        <ion-item class="item-input">
+            <input type="text" ng-model="item.ItemId" placeholder="Item Id">
+        </ion-item>		   
+        <ion-item class="item-input">
+            <input type="text" ng-model="item.ItemName" placeholder="Item Name">
+        </ion-item>		   
+        <ion-item class="item-input">
+            <input type="text" ng-model="item.Quantity" placeholder="Quantity">
+        </ion-item>		  
+        <input type="submit" class="button button-block button-balanced" value="Update Quanity">
+        </ion-list>
+    </form>
+    </ion-content>
+</ion-view>

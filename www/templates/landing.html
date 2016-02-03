@@ -1,0 +1,15 @@
+<ion-view view-title="Select A CP">
+    <ion-content class="padding"> 
+    <h3>Hello {{user.userName}}</h3>	
+    <ion-list>
+        <!-- <ion-item > Select A CP </ion-item> -->
+        <!-- <ion-item ng-repeat="cp in cps"> -->
+        <a class="item" item-icon-right ng-repeat="cp in cps" href="#" ng-click="gotoItemEntry()">  
+            {{cp.OmniName}}
+        </a>			
+        
+        <!-- </ion-item> -->
+    </ion-list>		          
+        <button class="button button-block button-assertive" ng-click="logout()">Log Out</button>
+    </ion-content>
+</ion-view>
