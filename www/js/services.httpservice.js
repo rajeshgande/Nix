@@ -31,7 +31,8 @@ angular.module('nix.services')
 			  url: cpurl,
 			  headers: {
 						'OCClientContext': '{   "ProductName" : "CP",   "PartnerProductId" : "",   "OmniCenterInstallation" : "CPC01",   "TimeStamp" : "06/26/2016 19:40:05"  }', 
-						'Content-Type': 'application/json'
+						'Content-Type': 'application/json',
+                        'Authorization' : 'bearer ' + window.localStorage['token']
 						},
 			}).then(function successCallback(response) {
 				 console.log('Get CPs', response.data);
@@ -52,7 +53,8 @@ angular.module('nix.services')
 						url: updateqtyURl,
 						headers: {
 							'OCClientContext': '{   "ProductName" : "CP",   "PartnerProductId" : "",   "OmniCenterInstallation" : "CPC01",   "TimeStamp" : "06/26/2016 19:40:05"  }', 
-						    'Content-Type': 'application/json'
+						    'Content-Type': 'application/json',
+                            'Authorization' : 'bearer ' + window.localStorage['token']
 						},
 						
 						data: '{itemId:"'+ item.ItemId+'",quantity:"'+ item.Quantity +'"}'						
@@ -71,7 +73,8 @@ angular.module('nix.services')
 						url:  window.localStorage.getItem("baseurl")  + '/CpItem/ItemByBarcode?barcode='+ barcode,
 						headers: {
 							'OCClientContext': '{   "ProductName" : "CP",   "PartnerProductId" : "",   "OmniCenterInstallation" : "CPC01",   "TimeStamp" : "06/26/2016 19:40:05"  }', 
-						    'Content-Type': 'application/json'
+						    'Content-Type': 'application/json',
+                            'Authorization' : 'bearer ' + window.localStorage['token']
 						}
                         }).then(function successCallback(response) {
                             var item = 	response.data;

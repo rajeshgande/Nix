@@ -3,7 +3,7 @@ angular.module('nix.controllers')
 	$scope.user = {};
  
 	if(window.localStorage.getItem("serveraddress") == undefined ) {
-          $scope.user.ServerAddress =  localhost;
+          $scope.user.ServerAddress =  'localhost';
         }
 	else{
 		$scope.user.ServerAddress = window.localStorage.getItem("serveraddress");
@@ -20,7 +20,7 @@ angular.module('nix.controllers')
 		window.localStorage.setItem('serveraddress', $scope.user.ServerAddress);
 		window.localStorage.setItem("baseurl", 'http://' + $scope.user.ServerAddress + ':40405/');	
 		
-        formData.updateForm(user);	 
+        formData.updateForm(user);
 		 
 		 auth.login(user, function(){ $state.go('landing');});
 		
