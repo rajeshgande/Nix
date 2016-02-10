@@ -47,7 +47,7 @@ angular.module('nix.services')
 	};
 	
 	  function updateQty(item) {
-		  var updateqtyURl = window.localStorage.getItem("baseurl")  + '/CpItem/ItemQuantity';
+		  var updateqtyURl = window.localStorage.getItem("baseurl")  + '/CycleCount/UpdateCycleCount';
             $http({
 						method: 'POST',
 						url: updateqtyURl,
@@ -70,7 +70,7 @@ angular.module('nix.services')
     function getItemDetails(barcode){         
          return $http({
 						method: 'GET',
-						url:  window.localStorage.getItem("baseurl")  + '/CpItem/ItemByBarcode?barcode='+ barcode,
+						url:  window.localStorage.getItem("baseurl")  + '/CycleCount/GetCycleCount?rawBarcode='+ barcode + '&omnisiteid=' + window.localStorage['omnisiteid'],
 						headers: {
 							'OCClientContext': '{   "ProductName" : "CP",   "PartnerProductId" : "",   "OmniCenterInstallation" : "CPC01",   "TimeStamp" : "06/26/2016 19:40:05"  }', 
 						    'Content-Type': 'application/json',

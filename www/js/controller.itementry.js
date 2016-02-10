@@ -1,14 +1,14 @@
 angular.module('nix.controllers')
 .controller('ItemEntryCtrl', function($scope, $state, formData, httpService, $cordovaBarcodeScanner, $ionicPlatform) {
-	
-    var vm = this;
+	    
 	 $scope.item = {};
 	 $scope.scan2 = function(){
           console.log("Logging Out ", $scope.user);
          alert('abc');
          };
 	$scope.headerText = 'Enter Cycle Count';
-	$scope.CP = 'abcd';
+	$scope.rawBarcode = '300080923603';
+    
 	
 	$scope.gotoCPList = function() {
 		 $state.go('landing');
@@ -24,10 +24,9 @@ angular.module('nix.controllers')
      
     if (!window.cordova) {
     // running in dev mode
-        $scope.scan = function(){
-            var barcode = "1234";               
+        $scope.scan = function(){                    
             httpService
-                .getItemDetails(barcode)
+                .getItemDetails($scope.rawBarcode)
                 .then(function(data) {
                     $scope.item = data;
                     });   
@@ -48,6 +47,7 @@ angular.module('nix.controllers')
                         .getItemDetails(barcode)
                         .then(function(data) {
                             $scope.item=data;
+                            console.log(data);
                             });                    
                 }, function(error) {
                     alert('Error: ' + error);

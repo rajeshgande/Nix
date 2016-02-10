@@ -14,7 +14,8 @@ angular.module('nix.controllers')
 		 auth.logout( function(){$state.go('login')});	
 	};
 	
-	 $scope.gotoItemEntry = function() {		
+	 $scope.gotoItemEntry = function(cp) {         
+        window.localStorage['omnisiteid'] = cp.OmniSiteId;
 		$state.go('itementry');
 	};
 })
