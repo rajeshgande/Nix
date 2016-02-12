@@ -1,0 +1,19 @@
+<ion-view title="Settings">
+    <ion-content overflow-scroll="true" padding="true" scroll="false" class="has-header">
+        <form class="list">
+            <ion-list>
+                <label class="item item-input" name="ServerAddress">
+                    <span class="input-label">ServerAddress</span>
+                    <input type="text" placeholder="ServerAddress">
+                </label>
+            </ion-list>
+            <ion-toggle toggle-class="toggle-positive" ng-checked="true" name="EnableCache">Cache Scanned Items</ion-toggle>
+            <label class="item item-select" name="DefaultInstallation">
+                <span class="input-label">Default Installation</span>
+                <select>
+                    <option></option>
+                </select>
+            </label>
+        </form>
+    </ion-content>
+</ion-view>

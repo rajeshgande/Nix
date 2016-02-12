@@ -1,5 +1,5 @@
 angular.module('nix.controllers')
-.controller('LandingCtrl', function($scope, $state, httpService, auth) {
+.controller('cplistCtrl', function($scope, $state, httpService, auth) {
 	
 	$scope.user = auth.getLoggedInUser();
 	
@@ -16,6 +16,6 @@ angular.module('nix.controllers')
 	
 	 $scope.gotoItemEntry = function(cp) {         
         window.localStorage['omnisiteid'] = cp.OmniSiteId;
-		$state.go('itementry');
+		$state.go('menu.cyclecount');
 	};
 })

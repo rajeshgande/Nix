@@ -26,6 +26,16 @@ angular.module('nix.services')
            }
            return user;
        }
+       
+       
+       function isuserLoggedIn() {
+           var token =  window.localStorage['token'];
+           var result = false;
+           if (typeof token !== 'undefined' && token != "") {
+               result = true;
+           }
+           return result;
+       }
 	   
 	   function loginuser(loggindata, success) {
             $http({
@@ -68,7 +78,11 @@ angular.module('nix.services')
            },
 			getLoggedInUser : function(){		
 				tokenClaims = getClaimsFromToken();			
-				return { userId : tokenClaims.Omnicell_UserId, userName : tokenClaims.Omnicell_UserName};
-			}		   
+				return { userId : tokenClaims.Omnicell_UserId, userName : tokenClaims.Omnicell_UserName, isLoggedIn : true};
+			},            
+            isuserLoggedIn : function(){		
+				var isloggedin = isuserLoggedIn();			
+				return isloggedin;;
+			}            	   
        };
    })

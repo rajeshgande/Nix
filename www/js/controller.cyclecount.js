@@ -1,5 +1,5 @@
 angular.module('nix.controllers')
-.controller('ItemEntryCtrl', function($scope, $state, formData, httpService, $cordovaBarcodeScanner, $ionicPlatform) {
+.controller('cycleCountCtrl', function($scope, $state, formData, httpService, $cordovaBarcodeScanner, $ionicPlatform) {
 	    
 	 $scope.item = {};
 	 $scope.scan2 = function(){

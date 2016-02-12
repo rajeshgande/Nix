@@ -10,7 +10,7 @@ angular.module('nix.controllers')
 	}				
 	
 	 $scope.goToItemEntry = function(){
-		 $state.go('itementry');
+		 $state.go('cyclecount');
 	 };
 	 
 	 $scope.submitForm = function(user) {	
@@ -22,8 +22,8 @@ angular.module('nix.controllers')
 		
         formData.updateForm(user);
 		 
-		 auth.login(user, function(){ $state.go('landing');});
-		
+		 auth.login(user, function(){ $state.go('menu.cplist');});
+		window.localStorage['isuserLoggedIn'] = true;
 		 console.log("Logging In ", user);
 		
 	   } else {
