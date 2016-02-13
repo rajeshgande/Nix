@@ -4,14 +4,13 @@
             <ion-list>
                 <label class="item item-input" name="ServerAddress">
                     <span class="input-label">ServerAddress</span>
-                    <input type="text" placeholder="ServerAddress">
+                    <input type="text" placeholder="ServerAddress" ng-model="serverAddress" ng-change="onServerAddressChange()">
                 </label>
-            </ion-list>
-            <ion-toggle toggle-class="toggle-positive" ng-checked="true" name="EnableCache">Cache Scanned Items</ion-toggle>
-            <label class="item item-select" name="DefaultInstallation">
-                <span class="input-label">Default Installation</span>
-                <select>
-                    <option></option>
+            </ion-list>            
+            <label class="item item-select" name="Installation">
+                <span class="input-label">Installation</span>
+                <select ng-model="installId" ng-change="onInstallIdChange()">
+                    <option ng-repeat="installation in installations" value="{{installation.InstallId}}">{{installation.InstallId}}</option>
                 </select>
             </label>
         </form>

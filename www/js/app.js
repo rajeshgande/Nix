@@ -22,9 +22,6 @@ angular.module('nix', ['ionic','nix.controllers', 'nix.services', 'nix.routes', 
 
 angular.module('nix.controllers', [])
 
-angular.module('nix.controllers')
-.controller('settingsCtrl', function($scope) {
-})
 
 angular.module('nix.controllers')
 .controller('menuCtrl', function($scope, $state, httpService, auth) {
