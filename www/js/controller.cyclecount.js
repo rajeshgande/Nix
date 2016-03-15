@@ -7,7 +7,7 @@ angular.module('nix.controllers')
          alert('abc');
          };
 	$scope.headerText = 'Enter Cycle Count';
-	$scope.rawBarcode = '300080923603';
+	$scope.rawBarcode = '5026859315';// '300080923603';
     
 	
 	$scope.gotoCPList = function() {
@@ -17,9 +17,8 @@ angular.module('nix.controllers')
     $scope.submitForm = function(item) {	
 	
 		 formData.updateForm(item);	 
-		 
-		 httpService.updateQty(item);	
-	  
+		// var cycleCount = { ItemId : item.ItemId, Quantity: item.QuantityOnHand, ExpirationDate: item.ExpirationDate}
+		 httpService.updateQty(item);		  
 	 };
      
     if (!window.cordova) {

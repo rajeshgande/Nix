@@ -14,8 +14,10 @@ angular.module('nix.controllers')
 		 auth.logout( function(){$state.go('login')});	
 	};
 	
-	 $scope.gotoItemEntry = function(cp) {         
+	 $scope.gotoCycleCount = function(cp) {  
+        console.log('go to cycle count screen');
         window.localStorage['omnisiteid'] = cp.OmniSiteId;
+        window.localStorage['omniIpAddress'] = cp.IpAddress;        
 		$state.go('menu.cyclecount');
 	};
 })
