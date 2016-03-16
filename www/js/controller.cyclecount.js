@@ -1,23 +1,17 @@
 angular.module('nix.controllers')
 .controller('cycleCountCtrl', function($scope, $state, formData, httpService, $cordovaBarcodeScanner, $ionicPlatform) {
 	    
-	 $scope.item = {};
-	 $scope.scan2 = function(){
+	 $scope.item = {ItemId : "", FormattedGenericName : "", QuantityOnHand : "", ExpirationDate : ""};
+          
+     $scope.scan2 = function(){
           console.log("Logging Out ", $scope.user);
          alert('abc');
          };
 	$scope.headerText = 'Enter Cycle Count';
 	$scope.rawBarcode = '5026859315';// '300080923603';
-    
-	
-	$scope.gotoCPList = function() {
-		 $state.go('landing');
-	};	
-		 
-    $scope.submitForm = function(item) {	
-	
+    		 
+    $scope.submitForm = function(item) {		
 		 formData.updateForm(item);	 
-		// var cycleCount = { ItemId : item.ItemId, Quantity: item.QuantityOnHand, ExpirationDate: item.ExpirationDate}
 		 httpService.updateQty(item);		  
 	 };
      

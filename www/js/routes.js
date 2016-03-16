@@ -2,6 +2,7 @@ angular.module('nix.routes', [])
     .config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('menu', {
+                cache: false,
                 url: '/menu',
                 abstract:true,
                 templateUrl: 'views/menu.html',
@@ -17,6 +18,7 @@ angular.module('nix.routes', [])
                 }
             })        
             .state('menu.login', {
+                cache: false,
                 url: '/login',
                 views: {
                     'menuContent': {
@@ -35,6 +37,7 @@ angular.module('nix.routes', [])
                 }
             })            
              .state('menu.cyclecount', {
+                cache: false,
                 url: "/cyclecount",
                   views: {
                     'menuContent': {

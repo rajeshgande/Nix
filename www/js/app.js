@@ -23,15 +23,20 @@ angular.module('nix.controllers', [])
 
 
 angular.module('nix.controllers')
-.controller('menuCtrl', function($scope, $state, httpService, auth) {
-	    		
+.controller('menuCtrl', function($scope, $state, httpService, auth, $rootScope) {
+   $rootScope.control = {
+            isLoggedIn: false
+        };	    		
    $scope.isloggedIn = auth.isuserLoggedIn();	
    console.log("login in status: " + $scope.isloggedIn)
 
 	$scope.logout = function() {
-        $scope.user = auth.getLoggedInUser();
-		 console.log("Logging Out ", $scope.user);
-		 auth.logout( function(){$state.go('login')});	
+        //  $scope.user = auth.getLoggedInUser();
+		//  console.log("Logging Out ", $scope.user);
+		 auth.logout( function(){$state.go('menu.login')});
+          $rootScope.control = {
+            isLoggedIn: false
+        };	
 	};	 
 })
 

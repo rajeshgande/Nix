@@ -12,7 +12,7 @@ angular.module('nix.controllers')
         console.log(window.localStorage['baseurl'] );
         console.log(  $scope.installations );
     };
-    
+    /*
     //installation settings
     httpService.getHospitals().then(function(data) {
 		   $scope.installations=data;
@@ -27,4 +27,5 @@ angular.module('nix.controllers')
         window.localStorage['installId'] = $scope.installId;
         console.log( window.localStorage['installId']);
     };    
+    */
 })

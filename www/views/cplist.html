@@ -1,18 +1,15 @@
 <ion-view view-title="Select A CP">
     <ion-nav-buttons side="left">
-        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
-    </ion-nav-buttons>		
-    <ion-content class="padding"> 
-    <h3>Hello {{user.userName}}</h3>	
-    <ion-list>
-        <!-- <ion-item > Select A CP </ion-item> -->
-        <!-- <ion-item ng-repeat="cp in cps"> -->
-        <a class="item" item-icon-right ng-repeat="cp in cps" href="#" ng-click="gotoCycleCount(cp)">  
-            {{cp.OmniName}}
-        </a>			
-        
-        <!-- </ion-item> -->
-    </ion-list>		          
-        <button class="button button-block button-assertive" ng-click="logout()">Log Out</button>
-    </ion-content>
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>      
+    </ion-nav-buttons>    		
+    <ion-content class="padding"> 	
+    <label class="pull right">
+        <span class="input-label pull right"><i class="icon ion-person"></i>{{user.userName}}</span>
+    </label>
+    <ion-list>       
+        <a class="item item-icon-right"  ng-repeat="cp in cps" href="#" ng-click="gotoCycleCount(cp)">  
+            {{cp.OmniName}} <i class="icon ion-ios-arrow-right"></i>
+        </a>
+    </ion-list>		
+    </ion-content>   
 </ion-view>
