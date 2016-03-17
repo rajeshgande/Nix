@@ -2,14 +2,12 @@ angular.module('nix.controllers')
 .controller('LogInCtrl', function($scope, $state, $http, formData, auth, $rootScope) {
 	
     $scope.user = {};   
-
  
-	if(window.localStorage.getItem("serveraddress") == undefined ) {
-          window.localStorage['baseurl'] =  'http://localhost:40405/';          
+	 if(window.localStorage.getItem("baseurl") == undefined || window.localStorage['baseurl'] == "") {
+          window.localStorage['baseurl'] =  'https://omninix.omnicellanalytics.com:40405';
         }
-	else{
-		$scope.user.ServerAddress = window.localStorage['baseurl'];
-	}				
+    
+    $scope.user.ServerAddress = window.localStorage['baseurl'];
 	
 	 $scope.goToItemEntry = function(){
 		 $state.go('cyclecount');

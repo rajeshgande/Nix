@@ -8,36 +8,40 @@ angular.module('nix.controllers')
          alert('abc');
          };
 	$scope.headerText = 'Enter Cycle Count';
-	$scope.rawBarcode = '5026859315';// '300080923603';
+
     		 
     $scope.submitForm = function(item) {		
 		 formData.updateForm(item);	 
-		 httpService.updateQty(item);		  
+		 httpService.updateQty(item);
 	 };
      
-    if (!window.cordova) {
-    // running in dev mode
+     if ($scope.currentlyScanning === true) {           
+            return;
+      }
+     else if (!window.cordova) {
+         // running in dev browser mode
+        $scope.currentlyScanning = false;
+        $scope.rawBarcode = '1234567';     
         $scope.scan = function(){                    
             httpService
                 .getItemDetails($scope.rawBarcode)
                 .then(function(data) {
                     $scope.item = data;
-                    });   
+                    }); 
         };
     } else {
+        $scope.currentlyScanning = true;
         // running in mobile device  
         $scope.scan = function(){
             $ionicPlatform.ready(function() {
                 $cordovaBarcodeScanner
                 .scan()
                 .then(function(result) {
-                    var barcode = result.text
-                    
-                    alert(barcode);
-                    console.log("Scanned barcode: " + barcode);
-                    
+                    $scope.currentlyScanning = false;
+                    $scope.rawBarcode = result.text;
+                    console.log("Scanned barcode: " + $scope.rawBarcode);                    
                     httpService
-                        .getItemDetails(barcode)
+                        .getItemDetails($scope.rawBarcode)
                         .then(function(data) {
                             $scope.item=data;
                             console.log(data);

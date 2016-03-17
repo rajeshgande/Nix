@@ -2,15 +2,15 @@ angular.module('nix.controllers')
 .controller('settingsCtrl', function($scope, httpService) {
     
     if(window.localStorage.getItem("baseurl") == undefined || window.localStorage['baseurl'] == "") {
-          window.localStorage['baseurl'] =  'http://localhost:40405/';
+           window.localStorage['baseurl'] =  'https://omninix.omnicellanalytics.com:40405';
         }
 	
     $scope.serverAddress = window.localStorage['baseurl'];  
     $scope.onServerAddressChange = function () {
         window.localStorage['baseurl'] = $scope.serverAddress;
-        $scope.installations = httpService.getHospitals();
-        console.log(window.localStorage['baseurl'] );
-        console.log(  $scope.installations );
+       // $scope.installations = httpService.getHospitals();
+        //console.log(window.localStorage['baseurl'] );
+        //console.log($scope.installations );
     };
     /*
     //installation settings
