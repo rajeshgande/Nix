@@ -12,8 +12,14 @@ angular.module('nix.controllers')
           console.log("Logging Out ", $scope.user);
          alert('abc');
          };
-	$scope.headerText = 'Enter Cycle Count';
-
+	$scope.headerText = 'Cycle Count';
+    
+    if (!window.cordova)
+    {
+        // running in dev browser mode
+        //$scope.rawBarcode = '1234567';  
+        $scope.rawBarcode = '5026859315';
+    }
     		 
     $scope.submitForm = function(item) {		
 		 formData.updateForm(item);	 
@@ -34,7 +40,7 @@ angular.module('nix.controllers')
      else if (!window.cordova) {
          // running in dev browser mode
         $scope.currentlyScanning = false;
-        $scope.rawBarcode = '1234567';     
+        
         $scope.scan = getitem;
     } else {
         $scope.currentlyScanning = true;

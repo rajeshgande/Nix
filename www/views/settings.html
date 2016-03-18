@@ -6,6 +6,7 @@
                     <span class="input-label">ServerAddress</span>
                     <input type="text" placeholder="ServerAddress" ng-model="serverAddress" ng-change="onServerAddressChange()">
                 </label>
+                <ion-toggle ng-model="proxycalls.checked" ng-checked="proxycalls.checked" toggle-class="toggle-assert" ng-change="onProxycallsChange()">Proxy Calls</ion-toggle>                
             </ion-list>            
             <!--<label class="item item-select" name="Installation">
                 <span class="input-label">Installation</span>

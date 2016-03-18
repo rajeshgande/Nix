@@ -48,19 +48,28 @@ angular.module('nix.services')
 	
 	  function updateQty(item) {
           
-		var updateqtyURl = window.localStorage.getItem("baseurl")  + '/CycleCount/UpdateCycleCount';
-        var cycleCount = { ItemId : item.ItemId, Quantity: item.QuantityOnHand, ExpirationDate: item.ExpirationDate}
-        //var updateqtyURl = 'http://' +  window.localStorage.getItem("omniIpAddress") + ':40407/api/items?barcode=';
+        var uri = 'http://' +  window.localStorage.getItem("omniIpAddress") + ':40407/api/items';
+        var targeturl = uri;
+        if( JSON.parse(window.localStorage['proxycalls']) === true)
+        {
+             uri = window.localStorage.getItem("baseurl")  + '/Proxy/Post';
+             console.log('proxy call');
+        }
+        else {
+            console.log('non proxy call');
+        }
+        
+        var cycleCount = { ItemId : item.ItemId, Quantity: item.QuantityOnHand, ExpirationDate: item.ExpirationDate}        
         $http({
                     method: 'POST',
-                    url: updateqtyURl,
+                    url: uri,
                     headers: {
                         'OCClientContext': '{   "ProductName" : "CP",   "PartnerProductId" : "",   "OmniCenterInstallation" : "CPC01",   "TimeStamp" : "06/26/2016 19:40:05"  }', 
                         'Content-Type': 'application/json',
                         'Authorization' : 'bearer ' + window.localStorage['token'],
                         'x-clientId' : '00000000-0000-0000-0000-000000000000',
                         'x-apikey' : 'sdkfjnb983t47h39gn7fh92fg39ng9h87ghf298h',
-                        'cpIpaddress' : window.localStorage['omniIpAddress']
+                        'x-targeturl' : targeturl
                     },
                     
                     data: cycleCount// '{ItemId:"'+ item.ItemId+'",Quantity:"'+ item.QuantityOnHand +'",ExpirationDate:"'+ item.ExpirationDate+'}'						
@@ -74,18 +83,27 @@ angular.module('nix.services')
 	};
     
     function getItemDetails(barcode){       
-        var itemUrl = window.localStorage.getItem("baseurl")  + '/CycleCount/GetCycleCount?barcode='+ barcode + '&omnisiteid=' + window.localStorage['omnisiteid'];
-        // var itemUrl = 'http://' +  window.localStorage.getItem("omniIpAddress") + ':40407/api/items?barcode=' +  barcode;
+        var uri = 'http://' +  window.localStorage.getItem("omniIpAddress") + ':40407/api/items?barcode='+ barcode;    
+        var targeturl = uri;
+        if( JSON.parse(window.localStorage['proxycalls']) === true)
+        {
+             uri = window.localStorage.getItem("baseurl")  + '/Proxy/Get?barcode='+ barcode;
+             console.log('proxy call to cp');
+        }
+        else {
+            console.log('non proxy call to cp');
+        }
+         
          return $http({
 						method: 'GET',
-						url:  itemUrl,
+						url:  uri,
 						headers: {
 							'OCClientContext': '{   "ProductName" : "CP",   "PartnerProductId" : "",   "OmniCenterInstallation" : "CPC01",   "TimeStamp" : "06/26/2016 19:40:05"  }', 
 						    'Content-Type': 'application/json',
                             'Authorization' : 'bearer ' + window.localStorage['token'],
                             'x-clientId' : '00000000-0000-0000-0000-000000000000',
                             'x-apikey' : 'sdkfjnb983t47h39gn7fh92fg39ng9h87ghf298h',
-                            'cpIpaddress' : window.localStorage['omniIpAddress']
+                            'x-targeturl' : targeturl
 						}
                         }).then(function successCallback(response) {
                             var item = 	response.data;

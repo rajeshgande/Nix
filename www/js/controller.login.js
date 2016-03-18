@@ -6,6 +6,10 @@ angular.module('nix.controllers')
 	 if(window.localStorage.getItem("baseurl") == undefined || window.localStorage['baseurl'] == "") {
           window.localStorage['baseurl'] =  'https://omninix.omnicellanalytics.com:40405';
         }
+        
+     if(window.localStorage.getItem("proxycalls") == undefined || window.localStorage['proxycalls'] == "") {
+           window.localStorage['proxycalls'] =  true;
+        }
     
     $scope.user.ServerAddress = window.localStorage['baseurl'];
 	

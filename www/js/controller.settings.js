@@ -4,14 +4,21 @@ angular.module('nix.controllers')
     if(window.localStorage.getItem("baseurl") == undefined || window.localStorage['baseurl'] == "") {
            window.localStorage['baseurl'] =  'https://omninix.omnicellanalytics.com:40405';
         }
-	
-    $scope.serverAddress = window.localStorage['baseurl'];  
+    $scope.serverAddress = window.localStorage['baseurl'];     
     $scope.onServerAddressChange = function () {
         window.localStorage['baseurl'] = $scope.serverAddress;
-       // $scope.installations = httpService.getHospitals();
-        //console.log(window.localStorage['baseurl'] );
-        //console.log($scope.installations );
     };
+    
+    if(window.localStorage.getItem("proxycalls") == undefined || window.localStorage['proxycalls'] == "") {
+        window.localStorage['proxycalls'] =  true;
+    }
+    $scope.proxycalls = { checked : window.localStorage['proxycalls']};
+    $scope.proxycalls.checked = JSON.parse(window.localStorage['proxycalls']); 
+    $scope.onProxycallsChange = function () {
+        window.localStorage['proxycalls'] = $scope.proxycalls.checked;        
+        console.log('settings - proxycall:' + window.localStorage['proxycalls']);
+    };
+    
     /*
     //installation settings
     httpService.getHospitals().then(function(data) {
