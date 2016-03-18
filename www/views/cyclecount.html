@@ -23,9 +23,16 @@
         <ion-item class="item-input">
             <input type="text" ng-model="item.QuantityOnHand" placeholder="Quantity">
         </ion-item>	
+        <ion-item class="item-input">
+            <input type="text" ng-model="item.Location" placeholder="Location">
+        </ion-item>	
          <ion-item class="item-input">
-            <input type="text" ng-model="item.ExpirationDate" placeholder="ExpirationDate">
-        </ion-item>		  
+            <input type="date" ng-model="item.ExpirationDate" placeholder="ExpirationDate">
+        </ion-item>	
+         <ion-item class="item-input">           
+           <div numeric="numeric_options"  ng-model="item.Quantity" placeholder="Quantity"></div>
+        </ion-item>
+         	  
         <input type="submit" class="button button-block button-balanced" value="Update Quanity">
         </ion-list>
     </form>

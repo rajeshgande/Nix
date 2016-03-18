@@ -1,8 +1,13 @@
 angular.module('nix.controllers')
 .controller('cycleCountCtrl', function($scope, $state, formData, httpService, $cordovaBarcodeScanner, $ionicPlatform) {
 	    
-	 $scope.item = {ItemId : "", FormattedGenericName : "", QuantityOnHand : "", ExpirationDate : ""};
-          
+	$scope.item = {ItemId : "", FormattedGenericName : "", QuantityOnHand : "", ExpirationDate : ""};
+   
+    $scope.numeric_options = {
+    start: function (event, ui) { console.log('numeric start'); },
+    spin: function (event, ui) { console.log('numeric spin'); }
+    }
+         
      $scope.scan2 = function(){
           console.log("Logging Out ", $scope.user);
          alert('abc');
