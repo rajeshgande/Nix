@@ -20,6 +20,14 @@ angular.module('nix.controllers')
 		 httpService.updateQty(item);
 	 };
      
+     var getitem = function(){                    
+            httpService
+                .getItemDetails($scope.rawBarcode)
+                .then(function(data) {
+                    $scope.item = data;
+                    }); 
+        };
+        
      if ($scope.currentlyScanning === true) {           
             return;
       }
@@ -27,13 +35,7 @@ angular.module('nix.controllers')
          // running in dev browser mode
         $scope.currentlyScanning = false;
         $scope.rawBarcode = '1234567';     
-        $scope.scan = function(){                    
-            httpService
-                .getItemDetails($scope.rawBarcode)
-                .then(function(data) {
-                    $scope.item = data;
-                    }); 
-        };
+        $scope.scan = getitem;
     } else {
         $scope.currentlyScanning = true;
         // running in mobile device  
