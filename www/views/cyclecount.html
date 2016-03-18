@@ -10,29 +10,34 @@
         Scan Barcode
         </button>
         </ion-item>	
-         <ion-item class="item-input">
-            <input type="text" ng-model="rawBarcode" placeholder="Raw Barcode">
-        </ion-item>		   
-        <form id="cycleCountFrom" name="cycleCountFrom" ng-submit="submitForm(item)">
-        <ion-item class="item-input">
-            <input type="text" ng-model="item.ItemId" placeholder="Item Id">
-        </ion-item>		   
-        <ion-item class="item-input">
-            <input type="text" ng-model="item.FormattedGenericName" placeholder="Item Name">
-        </ion-item>		   
-        <ion-item class="item-input">
-            <input type="text" ng-model="item.QuantityOnHand" placeholder="Quantity">
-        </ion-item>	
-        <ion-item class="item-input">
-            <input type="text" ng-model="item.Location" placeholder="Location">
-        </ion-item>	
-         <ion-item class="item-input">
-            <input type="date" ng-model="item.ExpirationDate" placeholder="ExpirationDate">
-        </ion-item>	
-         <ion-item class="item-input">           
-           <div numeric="numeric_options"  ng-model="item.Quantity" placeholder="Quantity"></div>
-        </ion-item>
-         	  
+        <label class="item item-input" name="Barcode">
+            <span class="input-label">Barcode</span>
+            <input type="text" placeholder="Barcode" ng-model="rawBarcode">
+        </label>
+         <form id="cycleCountFrom" name="cycleCountFrom" ng-submit="submitForm(item)">
+         <label class="item item-input" name="ItemId">
+            <span class="input-label">ItemId</span>            
+            <span class="input-label">{{item.ItemId}}</span>
+            <!--<input type="text" placeholder="ItemId" ng-model="item.ItemId">-->
+        </label>
+        <label class="item item-input" name="GenericName">
+            <span class="input-label">GenericName</span>
+            <span class="input-label">{{item.FormattedGenericName}}</span>
+            <!--<input type="text" placeholder="GenericName" ng-model="item.FormattedGenericName" width="40%">-->
+        </label>     
+       <label class="item item-input" name="Location">
+            <span class="input-label">Location</span>
+            <span class="input-label">{{item.Location}}</span>
+            <!--<input type="text" placeholder="Location" ng-model="item.Location">-->
+        </label> 
+         <label class="item item-input" name="ExpirationDate">
+            <span class="input-label">ExpirationDate</span>
+            <input type="text" placeholder="ExpirationDate" ng-model="item.ExpirationDate">
+        </label>         
+        <label class="item item-input" name="Quantity">
+            <span class="input-label">Quantity</span>
+              <div numeric="numeric_options"  ng-model="item.QuantityOnHand" placeholder="Quantity"></div>
+        </label> 
         <input type="submit" class="button button-block button-balanced" value="Update Quanity">
         </ion-list>
     </form>
