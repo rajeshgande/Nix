@@ -17,8 +17,8 @@ angular.module('nix.controllers')
     if (!window.cordova)
     {
         // running in dev browser mode
-        //$scope.rawBarcode = '1234567';  
-        $scope.rawBarcode = '5026859315';
+        $scope.rawBarcode = '1234567';  
+        //$scope.rawBarcode = '5026859315';
     }
     		 
     $scope.submitForm = function(item) {		
