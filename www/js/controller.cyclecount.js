@@ -26,7 +26,8 @@ angular.module('nix.controllers')
 		 httpService.updateQty(item);
 	 };
      
-     var getitem = function(){                    
+     var getitem = function(){   
+           $scope.currentlyScanning = false;                 
             httpService
                 .getItemDetails($scope.rawBarcode)
                 .then(function(data) {
@@ -39,8 +40,7 @@ angular.module('nix.controllers')
       }
      else if (!window.cordova) {
          // running in dev browser mode
-        $scope.currentlyScanning = false;
-        
+        $scope.currentlyScanning = false;        
         $scope.scan = getitem;
     } else {
         $scope.currentlyScanning = true;
