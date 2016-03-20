@@ -75,9 +75,10 @@ angular.module('nix.services')
                     data: cycleCount// '{ItemId:"'+ item.ItemId+'",Quantity:"'+ item.QuantityOnHand +'",ExpirationDate:"'+ item.ExpirationDate+'}'						
                         }).then(function successCallback(response) {	
                         //alert('Item: ' + item.ItemId+ '\'s quantity updated to ' + item.Quantity )
+                        alert('Item Updated');
                     },
                         function errorCallback(response) {
-                            alert('error updating item quantity...' + response.data)
+                            alert('error performing cycle count.')
                             console.log(response.data)
                 });
 	};
@@ -107,13 +108,16 @@ angular.module('nix.services')
 						}
                         }).then(function successCallback(response) {
                             var item = 	response.data;
-							console.log('Item Id: ' + item.ItemId + ' itemName ' + item.ItemId )
+                             if(item===null){
+                                 alert('No item found with barcode: ' + barcode);
+                             }
+							 //console.log('Item Id: ' + item.ItemId + ' itemName ' + item.ItemId )
                              return item;
 						},
-							function errorCallback(response) {
-                                var errorstr = 'Error getting Item details by barcode.' + response.data;
-								alert(errorstr)
-								console.log(errorstr)
+							function errorCallback(response) {                                
+                                var errorstr = 'Error getting Item details by barcode.';
+								alert(errorstr);
+								console.log(errorstr);
                                 return {};
 					});
     }

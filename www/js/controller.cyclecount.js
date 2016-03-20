@@ -7,17 +7,14 @@ angular.module('nix.controllers')
     start: function (event, ui) { console.log('numeric start'); },
     spin: function (event, ui) { console.log('numeric spin'); }
     }
-         
-     $scope.scan2 = function(){
-          console.log("Logging Out ", $scope.user);
-         alert('abc');
-         };
+    
 	$scope.headerText = 'Cycle Count';
     
+    // $scope.rawBarcode = {};  
     if (!window.cordova)
     {
         // running in dev browser mode
-        $scope.rawBarcode = '1234567';  
+        $scope.rawBarcode = {value:'1234567'};  
         //$scope.rawBarcode = '5026859315';
     }
     		 
@@ -26,10 +23,10 @@ angular.module('nix.controllers')
 		 httpService.updateQty(item);
 	 };
      
-     var getitem = function(){   
+     $scope.getitem = function(){   
            $scope.currentlyScanning = false;                 
             httpService
-                .getItemDetails($scope.rawBarcode)
+                .getItemDetails($scope.rawBarcode.value)
                 .then(function(data) {
                     $scope.item = data;
                     }); 
@@ -41,7 +38,7 @@ angular.module('nix.controllers')
      else if (!window.cordova) {
          // running in dev browser mode
         $scope.currentlyScanning = false;        
-        $scope.scan = getitem;
+        $scope.scan =  $scope.getitem;
     } else {
         $scope.currentlyScanning = true;
         // running in mobile device  
@@ -51,7 +48,7 @@ angular.module('nix.controllers')
                 .scan()
                 .then(function(result) {
                     $scope.currentlyScanning = false;
-                    $scope.rawBarcode = result.text;
+                    $scope.rawBarcode = {value:result.text};
                     console.log("Scanned barcode: " + $scope.rawBarcode);                    
                     httpService
                         .getItemDetails($scope.rawBarcode)

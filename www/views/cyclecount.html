@@ -12,7 +12,7 @@
         </ion-item>	
         <label class="item item-input" name="Barcode">
             <span class="input-label">Barcode</span>
-            <input type="text" placeholder="Barcode" ng-model="rawBarcode" ng-enter="getitem()"  style="font-weight:bold">
+            <input type="text" placeholder="Barcode" ng-model="rawBarcode.value" ng-enter="getitem()" style="font-weight:bold">
         </label>
          <form id="cycleCountFrom" name="cycleCountFrom" ng-submit="submitForm(item)">
          <label class="item item-input" name="ItemId">
@@ -39,7 +39,7 @@
             <!--<input type="text" placeholder="Location" ng-model="item.Location">-->
         </label> 
         
-        <input type="submit" class="button button-block button-balanced" value="Update Quanity">
+        <input type="submit" class="button button-block button-balanced" value="Update Quantity">
         </ion-list>
     </form>
     </ion-content>
