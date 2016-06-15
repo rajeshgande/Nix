@@ -1,1 +1,8 @@
 /* Empty. Add your own CSS if you like */
+.item-content-gray {
+    background-color: #363534;
+    background-image: url("OmnicellLogo_White.png");
+    background-repeat: no-repeat;
+    background-position: center;
+     height: 20%;
+}
