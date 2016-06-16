@@ -1,21 +1,22 @@
 
 <ion-view hide-nav-bar="true">
-<ion-content class="padding">     		
-    <div  class ="item-content-gray">
-        
-    </div>    
+<ion-content class="padding"> 
+     <div  class="item-login-omnicell-block"> <span style="color: white"> NIX </span> </div>   
+     <div class="spacer" style="height: 50px;"></div>
     <form ng-submit="submitForm(user)">
-        <ion-list>
         <ion-item class="item-input">
             <input type="text" ng-model="user.userId" placeholder="User Name">
         </ion-item>
+        <div class="spacer" style="height: 25px;"></div>
         <ion-item class="item-input">
             <input type="password" ng-model="user.password" placeholder="Password">
         </ion-item> 
+        <div class="spacer" style="height: 25px;"></div>
         <ion-item class="item-input">
             <input type="text" ng-model="user.ServerAddress" placeholder="ServerAddress">
-        </ion-item>			   
-            <input type="submit" class="button button-block button-balanced" value="Log In">		   
+        </ion-item>			
+          <div class="spacer" style="height: 25px;"></div>
+           <input type="submit" class="button button-block button-balanced" value="Log In">        
         </ion-list>
     </form>    
 </ion-content>
