@@ -12,7 +12,7 @@
             <input type="password" ng-model="user.password" placeholder="Password">
         </ion-item> 
         <div class="spacer" style="height: 25px;"></div>
-        <ion-item class="item-input">
+        <ion-item class="item-input" ng-show="serverAddressNotPopulated()">
             <input type="text" ng-model="user.ServerAddress" placeholder="ServerAddress">
         </ion-item>			
           <div class="spacer" style="height: 25px;"></div>

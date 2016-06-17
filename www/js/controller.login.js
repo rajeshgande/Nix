@@ -2,10 +2,14 @@ angular.module('nix.controllers')
 .controller('LogInCtrl', function($scope, $state, $http, formData, auth, $rootScope) {
 	
     $scope.user = {};   
+
+    $scope.serverAddressNotPopulated = function() {
+    	return window.localStorage.getItem("baseurl") == undefined || window.localStorage['baseurl'] == "";
+    } 
  
-	 if(window.localStorage.getItem("baseurl") == undefined || window.localStorage['baseurl'] == "") {
-          window.localStorage['baseurl'] =  'https://omninix.omnicellanalytics.com:40405';
-        }
+	if(window.localStorage.getItem("baseurl") == undefined || window.localStorage['baseurl'] == "") {
+    	window.localStorage['baseurl'] =  'https://omninix.omnicellanalytics.com:40405';
+    }
         
      if(window.localStorage.getItem("proxycalls") == undefined || window.localStorage['proxycalls'] == "") {
            window.localStorage['proxycalls'] =  true;
