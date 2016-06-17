@@ -1,23 +1,27 @@
 <ion-view view-title="{{headerText}}">
-    <ion-nav-buttons side="left">
-        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
-    </ion-nav-buttons>
-    <ion-content class="padding">
+   
+    <ion-content class="padding" has-header="true">
         <ion-list>
             <!--<button type="submit" class="button button-block button-balanced" ng-click="scan()"> Barcode</button>-->
-
-
-
-            <div class="row" style=" border 1px solid; border-color #69BE28;;padding:0px;">
-                <div class="col width-75" style="float:right;padding:0px; vertical-align: middle">
-                    <input type="text" class="input-block" placeholder="Barcode" ng-model="rawBarcode.value" ng-enter="getitem()">
-                </div>
-                <div class="col width-25 button-block  button-balanced" style="float:right;padding:0px;">
-                    <button class="button button-block button-balanced icon ion-ios-barcode" style="margin:0" ng-click="scan()" />
-                    Barcode
-                </div>
+           <div class="row">
+                <div class="col" style="width:100%">             
+                <select name="cpList" id="cpList"  
+                    ng-model="selectedCp" 
+                    ng-change="setCpSelection(selectedCp)"
+                    ng-options="cp.OmniName for cp in cps track by cp.OmniName">
+                    </select>
             </div>
-
+            </div>            
+                <div class="row" style=" border 1px solid; border-color #69BE28;;padding:0px;">
+                    <div class="col width-75" style="float:right;padding:0px; vertical-align: middle">
+                        <input type="text" class="input-block" placeholder="Barcode" ng-model="rawBarcode.value" ng-enter="getitem()">
+                    </div>
+                    <div class="col width-25 button-block  button-balanced" style="float:right;padding:0px;">
+                        <button class="button button-block button-balanced icon ion-ios-barcode" style="margin:0" ng-click="scan()" />
+                        Barcode
+                    </div>
+                </div>
+            
             <label class="item item-borderless item-stacked-label" name="Barcode">
                 <span class="input-label">Barcode</span>
                 <input type="text" placeholder="Barcode" ng-model="rawBarcode.value" ng-enter="getitem()" style="font-weight:bold">
