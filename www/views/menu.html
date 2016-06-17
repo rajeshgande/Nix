@@ -17,9 +17,8 @@
                 <ion-item ui-sref="menu.login" menu-close="" ng-show="!control.isLoggedIn"><i class='ion-locked'></i>&nbsp;Log In</ion-item>              
                 <ion-item ui-sref="menu.settings" menu-close="" ><i class='ion-settings'></i>&nbsp;Settings</ion-item>
                 <ion-item ui-sref="menu.cplist" menu-close="" ng-show="control.isLoggedIn"><i class='ion-navicon'></i>&nbsp;CpList</ion-item>
+                <ion-item ui-sref="menu.logout" ng-click="logout()" menu-close="" ng-show="control.isLoggedIn"><i class="icon ion-power""></i>&nbsp;Log off</ion-item>
             </ion-list>
-            <button class="button button-balanced button-clear button-block  icon ion-power" ng-click="logout()" ng-show="control.isLoggedIn">Sign Out</button>
-            <ion-list></ion-list>
         </ion-content>
     </ion-side-menu>
 </ion-side-menus>
