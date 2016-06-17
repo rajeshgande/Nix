@@ -14,11 +14,47 @@ $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
-$dark:                            #363534;
+
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
+$light:                            #fff;
+$dark:                            #363534;
 $balanced:                        #69BE28;
+$stable:                  $dark;
+$bar-stable-text:                 $light;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+//$bar-default-bg:                  $dark;
+
+ion-side-menu{
+    ion-content{
+        background-color: #5E6A71!important;
+    }
+    .item-content {
+        background-color: #5E6A71 !important;
+        color: $light!important;
+    }
+}
+
+// *****************login form***********
+#loginForm{
+    padding:20px;
+    ion-item {
+        margin-bottom: 30px;
+        margin-top: 10px;
+    }
+    h3{
+        margin-bottom: 40px;
+        margin-top: 40px;
+        text-align: center;
+        color: #5E6A71;
+    }
+    .item-Login {
+        padding-top: 40px;
+        border: none !important;
+    }
+}
+
+//***************************************
