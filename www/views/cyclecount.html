@@ -5,7 +5,7 @@
             <!--<button type="submit" class="button button-block button-balanced" ng-click="scan()"> Barcode</button>-->
            <div class="row">
                 <div class="col" style="width:100%">             
-                <select name="cpList" id="cpList"  
+                <select name="cpList" id="cpList"                 
                     ng-model="selectedCp" 
                     ng-change="setCpSelection(selectedCp)"
                     ng-options="cp.OmniName for cp in cps track by cp.OmniName">

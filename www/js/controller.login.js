@@ -17,9 +17,9 @@ angular.module('nix.controllers')
     
     $scope.user.ServerAddress = window.localStorage['baseurl'];
 	
-	 $scope.goToItemEntry = function(){
-		 $state.go('cyclecount');
-	 };
+	//  $scope.goToItemEntry = function(){
+	// 	 $state.go('cyclecount');
+	//  };
 	 
 	 $scope.submitForm = function(user) {	
 	 
@@ -27,7 +27,7 @@ angular.module('nix.controllers')
 		
         window.localStorage.setItem("baseurl", $scope.user.ServerAddress);
         formData.updateForm(user);
-		auth.login(user, function(){ $state.go('menu.cplist');});
+		auth.login(user, function(){ $state.go('menu.cyclecount');});
          
         $rootScope.control = {
             isLoggedIn: true
