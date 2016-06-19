@@ -4,5 +4,8 @@
 node_modules/
 platforms/
 plugins/
+.vs/
 .vs/Nix/v14/.suo
 nix.jsproj.user
+jsconfig.json
+.vscode/
