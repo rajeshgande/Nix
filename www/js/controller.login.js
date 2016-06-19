@@ -1,5 +1,5 @@
 angular.module('nix.controllers')
-.controller('LogInCtrl', function($scope, $state, $http, formData, auth, $rootScope) {
+.controller('LogInCtrl', function($scope, $state, $http, formData, auth, $rootScope, $ionicPopup) {
 	
     $scope.user = {};   
 
@@ -15,19 +15,25 @@ angular.module('nix.controllers')
            window.localStorage['proxycalls'] =  true;
         }
     
-    $scope.user.ServerAddress = window.localStorage['baseurl'];
-	
-	//  $scope.goToItemEntry = function(){
-	// 	 $state.go('cyclecount');
-	//  };
-	 
+    $scope.user.ServerAddress = window.localStorage['baseurl'];	
+
+   
+   var loginFailureAlert = function(responsedata){ 
+        $ionicPopup.alert({
+            title: 'Login Error',
+            template: responsedata.status == '400' ? 'Invalid User Id and Password' : "Server Error"        
+   });};
+		 
 	 $scope.submitForm = function(user) {	
 	 
 	   if (user.userId && user.password) {
 		
         window.localStorage.setItem("baseurl", $scope.user.ServerAddress);
         formData.updateForm(user);
-		auth.login(user, function(){ $state.go('menu.cyclecount');});
+		auth.login(user, 
+            function(){ $state.go('menu.cyclecount');}, 
+            loginFailureAlert
+       );
          
         $rootScope.control = {
             isLoggedIn: true
@@ -37,7 +43,11 @@ angular.module('nix.controllers')
          
 		
 	   } else {
-		 alert("Please enter user name and password");
+           //An alert dialog          
+            $ionicPopup.alert({
+                title: 'Login Error',
+                template: 'Please enter user name and password'
+            });
 	   }
 	 };
 })

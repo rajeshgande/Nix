@@ -1,5 +1,5 @@
 angular.module('nix.services')
-.service('httpService', function($http, urls) {
+.service('httpService', function($http, urls ) {
 	 
 	 function gethospitals() {
 		 console.log("Getting Hospitals ");	
@@ -75,7 +75,7 @@ angular.module('nix.services')
                     data: cycleCount// '{ItemId:"'+ item.ItemId+'",Quantity:"'+ item.QuantityOnHand +'",ExpirationDate:"'+ item.ExpirationDate+'}'						
                         }).then(function successCallback(response) {	
                         //alert('Item: ' + item.ItemId+ '\'s quantity updated to ' + item.Quantity )
-                        alert('Item Updated');
+                        alert('Item Updated');                        
                     },
                         function errorCallback(response) {
                             alert('error performing cycle count.')

@@ -37,7 +37,7 @@ angular.module('nix.services')
            return result;
        }
 	   
-	   function loginuser(loggindata, success) {
+	   function loginuser(loggindata, success, error) {
             $http({
 						method: 'POST',
 						url: window.localStorage.getItem("baseurl")  + urls.TOKEN_REQUEST,
@@ -53,8 +53,9 @@ angular.module('nix.services')
 								success();
 						},
 							function errorCallback(response) {
-								alert('error logging in...'+ response.data + ' serveraddress : ' + window.localStorage.getItem("baseurl") )
-								console.log(response.data)
+                                error(response);
+								//alert('error logging in...'+ response.data + ' serveraddress : ' + window.localStorage.getItem("baseurl") )
+								console.log('error logging in...'+ response.data + ' serveraddress : ' + window.localStorage.getItem("baseurl"))
 					});
        }
 
@@ -65,7 +66,7 @@ angular.module('nix.services')
                $http.post(window.localStorage.getItem("baseurl") + '/signup', data).success(success).error(error)
            },
            login: function (loggindata, success, error) {
-                 loginuser(loggindata, success);
+                 loginuser(loggindata, success, error);
 				},
            logout: function (success) {
                tokenClaims = {};
