@@ -25,6 +25,7 @@ angular.module('nix.controllers')
    
 	$scope.headerText = 'Cycle Count';
     
+    $scope.rawBarcode = { value: "" };
     // $scope.rawBarcode = {};  
     if (!window.cordova)
     {
@@ -64,9 +65,9 @@ angular.module('nix.controllers')
                 .then(function(result) {
                     $scope.currentlyScanning = false;
                     $scope.rawBarcode = {value:result.text};
-                    console.log("Scanned barcode: " + $scope.rawBarcode);                    
+                    console.log("Scanned barcode: " + $scope.rawBarcode.value);                    
                     httpService
-                        .getItemDetails($scope.rawBarcode)
+                        .getItemDetails($scope.rawBarcode.value)
                         .then(function(data) {
                             $scope.item=data;
                             console.log(data);
