@@ -1,5 +1,5 @@
 angular.module('nix.services')
-.service('httpService', function($http, urls ) {
+.service('httpService', function($http, urls, $ionicPopup) {
 	 
 	 function gethospitals() {
 		 console.log("Getting Hospitals ");	
@@ -74,12 +74,23 @@ angular.module('nix.services')
                     
                     data: cycleCount// '{ItemId:"'+ item.ItemId+'",Quantity:"'+ item.QuantityOnHand +'",ExpirationDate:"'+ item.ExpirationDate+'}'						
                         }).then(function successCallback(response) {	
-                        //alert('Item: ' + item.ItemId+ '\'s quantity updated to ' + item.Quantity )
-                        alert('Item Updated');                        
-                    },
+	                        $ionicPopup.alert({
+	     							title: 'Item Updated',
+	   						});
+
+	   						// Clear out the item info
+	   						item.ItemId = "";
+	   						item.FormattedGenericName = "";
+	   						item.QuantityOnHand = "";
+	   						item.ExpirationDate = "";
+	   						item.Location = "";
+                    	},
                         function errorCallback(response) {
-                            alert('error performing cycle count.')
-                            console.log(response.data)
+                            $ionicPopup.alert({
+     							title: 'Item Update Unsuccessful',
+     							template: 'Please verify all your information and try again.'
+   							});
+                            console.log(response.data);
                 });
 	};
     

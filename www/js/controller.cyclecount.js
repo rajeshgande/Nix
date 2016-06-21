@@ -6,7 +6,7 @@ angular.module('nix.controllers')
           $scope.selectedCp =  data[0]; 
 		});
            
-	$scope.item = {ItemId : "", FormattedGenericName : "", QuantityOnHand : "", ExpirationDate : ""};
+	$scope.item = { ItemId : "", FormattedGenericName : "", QuantityOnHand : "", ExpirationDate : "", Location : "" };
    
     $scope.numeric_options = {
     start: function (event, ui) { console.log('numeric start'); },
@@ -44,7 +44,7 @@ angular.module('nix.controllers')
                 .getItemDetails($scope.rawBarcode.value)
                 .then(function(data) {
                     $scope.item = data;
-                    }); 
+                }); 
         };
         
      if ($scope.currentlyScanning === true) {           
