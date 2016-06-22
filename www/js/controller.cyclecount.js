@@ -1,5 +1,5 @@
 angular.module('nix.controllers')
-.controller('cycleCountCtrl', function($scope, $state, formData, httpService, $cordovaBarcodeScanner, $ionicPlatform) {
+.controller('cycleCountCtrl', function($scope, $state, formData, httpService, $cordovaBarcodeScanner, $ionicPlatform, $ionicPopup) {
 	 
      httpService.getAllCPs().then(function(data) {
 		  $scope.cps=data;          
