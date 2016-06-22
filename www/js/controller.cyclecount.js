@@ -73,7 +73,7 @@ angular.module('nix.controllers')
                             console.log(data);
                             });                    
                 }, function(error) {
-                    alert('Error: ' + error);
+                    $ionicPopup.alert({ title: 'Error: ' + error });
                     console.log('Error: ' + error);
                 });
             });
