@@ -120,14 +120,18 @@ angular.module('nix.services')
                         }).then(function successCallback(response) {
                             var item = 	response.data;
                              if(item===null){
-                                 alert('No item found with barcode: ' + barcode);
+                                $ionicPopup.alert({
+	     							title: 'No item found with barcode: ' + barcode
+	   							});
                              }
 							 //console.log('Item Id: ' + item.ItemId + ' itemName ' + item.ItemId )
                              return item;
 						},
 							function errorCallback(response) {                                
-                                var errorstr = 'Error getting Item details by barcode.';
-								alert(errorstr);
+	                            $ionicPopup.alert({
+	     							title: 'Error getting Item details by barcode.'
+	   							});
+
 								console.log(errorstr);
                                 return {};
 					});
