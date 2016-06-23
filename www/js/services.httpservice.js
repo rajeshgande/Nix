@@ -79,6 +79,7 @@ angular.module('nix.services')
 	   						});
 
 	   						// Clear out the item info
+	   						item.rawBarcode.value = "";
 	   						item.ItemId = "";
 	   						item.FormattedGenericName = "";
 	   						item.QuantityOnHand = "";
