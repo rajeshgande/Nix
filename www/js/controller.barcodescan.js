@@ -1,12 +1,12 @@
 angular.module('nix.controllers')
-.controller('cycleCountCtrl', function($scope, $state, formData, httpService, $cordovaBarcodeScanner, $ionicPlatform, $ionicPopup) {
+.controller('barcodeScanCtrl', function($scope, $state, formData, httpService, $cordovaBarcodeScanner, $ionicPlatform, $ionicPopup) {
 	 
      httpService.getAllCPs().then(function(data) {
 		  $scope.cps=data;          
           $scope.selectedCp =  data[0]; 
 		});
            
-	$scope.item = { ItemId : "", FormattedGenericName : "", QuantityOnHand : "", ExpirationDate : "", Location : "", ItemBarCode : "" };
+	$scope.item = { ItemId : "", FormattedGenericName : "", QuantityOnHand : "", ExpirationDate : "", Location : "" };
    
     $scope.numeric_options = {
     start: function (event, ui) { console.log('numeric start'); },
@@ -23,13 +23,15 @@ angular.module('nix.controllers')
     // $scope.selectedCp =  JSON.parse(window.localStorage['SelectedCP']);
     //console.log( $scope.selectedCp);
    
-	$scope.headerText = 'Cycle Count';
-
+	$scope.headerText = 'Barcode Scan';
+    
+    $scope.rawBarcode = { value: "" };
+    // $scope.rawBarcode = {};  
     if (!window.cordova)
     {
         // running in dev browser mode
-        $scope.item.ItemBarCode = '1234567';  
-        // $scope.item.ItemBarCode = '5026859315';
+        $scope.rawBarcode = {value:'1234567'};  
+        //$scope.rawBarcode = '5026859315';
     }
     		 
     $scope.submitForm = function(item) {		
@@ -40,10 +42,9 @@ angular.module('nix.controllers')
      $scope.getitem = function(){   
            $scope.currentlyScanning = false;                 
             httpService
-                .getItemDetails($scope.item.ItemBarCode)
+                .getItemDetails($scope.rawBarcode.value)
                 .then(function(data) {
                     $scope.item = data;
-                    $scope.item.ExpirationDate = new Date($scope.item.ExpirationDate);
                 }); 
         };
         
@@ -63,10 +64,10 @@ angular.module('nix.controllers')
                 .scan()
                 .then(function(result) {
                     $scope.currentlyScanning = false;
-                    $scope.item.ItemBarCode = result.text;
-                    console.log("Scanned barcode: " + $scope.item.ItemBarCode);                    
+                    $scope.rawBarcode = {value:result.text};
+                    console.log("Scanned barcode: " + $scope.rawBarcode.value);                    
                     httpService
-                        .getItemDetails($scope.item.ItemBarCode)
+                        .getItemDetails($scope.rawBarcode.value)
                         .then(function(data) {
                             $scope.item=data;
                             console.log(data);

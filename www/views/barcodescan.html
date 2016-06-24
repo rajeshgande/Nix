@@ -1,67 +1,53 @@
 <ion-view view-title="{{headerText}}">
    
-    <ion-content id="cycleCount"  has-header="true">
+    <ion-content class="padding" has-header="true">
         <ion-list>
             <!--<button type="submit" class="button button-block button-balanced" ng-click="scan()"> Barcode</button>-->
-            <div class="row filter">
-                <div class="col styled-select">
+           <div class="row">
+                <div class="col" style="width:100%">             
                 <select name="cpList" id="cpList"                 
                     ng-model="selectedCp" 
                     ng-change="setCpSelection(selectedCp)"
-                            ng-options="cp.OmniName for cp in cps track by cp.IpAddress"></select>
+                    ng-options="cp.OmniName for cp in cps track by cp.IpAddress">
+                    </select>
             </div>
             </div>            
-            
-            <div id="scanDiv" class="item item-input-inset">
-                <label class="item-input-wrapper">
-                    <input type="text" placeholder="Scan Barcode"  ng-model="rawBarcode.value" ng-enter="getitem()">
-                </label>
-                <button class="button button-small button-balanced icon ion-ios-barcode" ng-click="scan()">
-                    Scan Code
-                </button>
-            </div>
-            <!--<div class="row" style="border: 1px solid; border-color: #69BE28; padding:0px;">
+                <div class="row" style="border: 1px solid; border-color: #69BE28; padding:0px;">
                     <div class="col-67" style="float:right;">
-                        <input type="text" class="input-block" placeholder="barcode" ng-model="item.ItemBarCode" ng-enter="getitem()">
+                        <input type="text" class="input-block" placeholder="barcode" ng-model="rawBarcode.value" ng-enter="getitem()">
                     </div>
                     <div class="col-33" style="float:right;padding:0px;">
                         <button class="button button-block button-balanced icon ion-ios-barcode" style="margin:0; padding:0" ng-click="scan()" />
                         Scan Code
                     </div>
-            </div>-->
+              </div>
             <form id="cycleCountFrom" name="cycleCountFrom" ng-submit="submitForm(item)">
-
              <label class="item item-borderless item-stacked-label" name="GenericName">
-                    <span class="input-label">Description</span>
-                    <input type="text" placeholder="Generic Name" ng-model="item.FormattedGenericName">
+                    <span class="input-label">Generic Name</span>
+                    <input type="text" placeholder="Generic Name" ng-model="item.FormattedGenericName" >
                     <!--<span style="font-weight:bold">{{item.FormattedGenericName}}</span>-->                   
                 </label>
                 <label class="item item-borderless item-stacked-label" name="ItemId">
                     <span class="input-label">Item Id</span>
-                    <input type="text" placeholder="Item Id" ng-model="item.ItemId">
+                    <input type="text" placeholder="Item Id" ng-model="item.ItemId" >
                     <!--<span  style="font-weight:bold">{{item.ItemId}}</span>-->
                 </label>               
                 <label class="item item-borderless item-stacked-label" name="Quantity">
                     <span class="input-label">QTY</span>
+                    <input type="number" placeholder="Quantity" ng-model="item.QuantityOnHand">
+                    <!--<div numeric="numeric_options" ng-model="item.QuantityOnHand" placeholder="Quantity" style="font-weight:bold; width:100px"></div>-->
                 </label>
-                <number-control quantity="item.QuantityOnHand" max="999" controlid="order-1" indexid="3"></number-control>
                 <label class="item item-borderless item-stacked-label" name="ExpirationDate">
                     <span class="input-label">EXP Date</span>
                     <input type="date" placeholder="ExpirationDate" ng-model="item.ExpirationDate">
                 </label>
                 <label class="item item-borderless item-stacked-label" name="Location">
                     <span class="input-label">Location</span>
-                    <input type="text" placeholder="GenericName" ng-model="item.Location">
+                    <input type="text" placeholder="GenericName" ng-model="item.Location" >
                     <!--<span class="input-label" style="font-weight:bold">{{item.Location}}</span>-->
                 </label>
-                
-                <!--<label class="item item-borderless item-stacked-label" name="Location">
-                    <input type="submit" class="button button-block button-balanced" value="Update Quantity">
-                </label>-->
-                <ion-footer-bar class="bar bar-footer">
                 <input type="submit" class="button button-block button-balanced" value="Update Quantity">
-                </ion-footer-bar>
-            </form>
         </ion-list>
+        </form>
     </ion-content>
 </ion-view>

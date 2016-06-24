@@ -46,6 +46,16 @@ angular.module('nix.routes', [])
                     }
                 }
             })
+            .state('menu.barcodescan', {
+                cache: false,
+                url: "/barcodescan",
+                  views: {
+                    'menuContent': {
+                        templateUrl: 'views/barcodescan.html',
+                        controller: 'barcodeScanCtrl'
+                    }
+                }
+            })
             
             // .state('login', {
             //     url: "/login",
