@@ -1,0 +1,55 @@
+﻿
+.oc-datefilter-section {
+    background: #A0a2a8 !important;
+    min-height: 80px;
+}
+
+.oc-datefilter {
+    @extend .col-xs-23;
+    padding-top: 25px;
+    padding-left: 20px;
+
+    label {
+        color: #FFFFFF;
+        font-weight: normal;
+    }
+}
+
+    .radio-inline {
+    padding-left: 0;
+        padding-right: 10px;
+        //padding-left: 10px;
+        min-width: 105px;
+    }
+
+.radio-inline + .radio-inline, .checkbox-inline + .checkbox-inline {
+    margin-top: 0;
+    margin-left: 0 !important; 
+}
+
+         input[type=radio] {
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+	}
+    
+    input[type="radio"] {
+     //   display:none;
+    }
+
+    input[type="radio"] + label span {
+    display: inline-block;
+    width: 17px;
+    height: 18px;
+    margin: 0 8px 0 0;
+    vertical-align: middle;
+        font-weight: normal;
+    background: url(../Content/images/radiobutton.png) -17px top no-repeat;
+    cursor: pointer;
+    }
+
+    input[type="radio"]:checked + label span {
+        width: 17px;
+        font-weight: normal;
+    background: url(../Content/images/radiobutton.png) left top no-repeat;
+    }

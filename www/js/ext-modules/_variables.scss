@@ -1,0 +1,128 @@
+﻿//## Core variables to override Bootstrap settings.
+//## Values in the Bootstrap variables file will not be applied 
+//## if already set here, because Bootstrap is using !default
+
+//** Number of columns in the grid.
+$grid-columns:              24;
+//** Padding between columns. Gets divided in half for the left and right.
+$grid-gutter-width:         15px;
+
+//## Gray and brand colors for use across Bootstrap.
+$brand-primary:         #69BE28;            // Omnicell green
+$brand-success:         $brand-primary;
+$brand-info:            #eec645;
+$brand-warning:         #f0ad4e;
+$brand-danger:          #d9534f;
+
+//## Navbar links
+$navbar-default-link-color:                #FFFFFF;
+$navbar-default-link-hover-color:          darken($navbar-default-link-color, 15%);
+$navbar-default-link-hover-bg:             transparent !default;
+$navbar-default-link-active-color:         darken($navbar-default-link-color, 15%);
+$navbar-default-link-active-bg: #363534;
+$navbar-height:                    36px;
+$navbar-margin-bottom:              10px;
+$navbar-default-bg:                #5E6A71 ;
+$login-navbar-default-bg:                #5E6A71 ;
+$login-label:                #5E6A71 ;
+//## Wells
+$well-bg: #d9edf7;
+$well-border: #bce8f1;
+$well-color: #31708f;
+
+//## Score Card Drug Group
+$drug-indicator-color:#ff0000;
+
+//## Scale Color
+$scale-extreme-bg : #C80819;
+$scale-high-bg : orange;
+$scale-moderate-bg : yellow;
+$scale-average-bg: #ffffff;
+$scale-average-font-color: #5E6A71;
+
+$score-card-border: #a0a2a8;
+
+$header-background-color: #5E6A71;
+
+//$scale-default-bg: #ffffff;
+
+// SVG Badge color on Dashboard
+//$badge-color: #8E969B;
+$badge-color: #5E6A71;
+$filter-area-breakpoint: 492px;
+
+/*$chosen-sprite-url: url(./chosen/chosen-sprite.png);
+$chose-sprite2x-url: url(./chosen/chosen-sprite@2x.png);*/
+
+$drugchart-border-color: #A0A2A8;
+
+//Typography - overriding Bootstrap defaults
+$font-family-sans-serif:  "Segoe UI","Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$text-color: #363534;
+$font-size-base: 14px; 
+$font-size-large: 16px;
+$font-size-small: 12px;
+$font-size-h1: 20px;
+$font-size-h2: $font-size-large;
+$font-size-h3: $font-size-base;
+$font-size-h4: $font-size-small;
+$font-size-h5: 10px;
+$font-size-h6: 8px;
+$headings-font-weight: bold;
+$state-danger-text: #C60619;
+
+$text-color-inverse: #FFFFFF;
+$filter-area-background: #A0A2A8;
+$patient-background: #97C0E6;
+$text-color-login-disclaimer: #9FA1A7;
+$screen-xs-min:                  496px;
+$screen-sm-min:                  784px;
+$screen-md-min:                  1025px;
+$screen-lg-min:                  1216px;
+
+
+//** Popover maximum width
+$popover-max-width:                   100%;
+$popover-border-color:          #c80819; //rgba(255, 0, 0, 1);//RED;
+$modal-header-border-color: $popover-border-color;
+$modal-content-border-color: $popover-border-color;
+
+$modal-sm:                    500px ;
+
+@function calcHeight($h1, $h2) {
+	@return ($h1 + $h2);
+}
+//Top Padding
+$header-index: 1000;//$zindex-navbar; // to hide popover when scrolling up
+$top-padding: 40px;//100px;//40px;
+$date-filter-height: 90px;
+$patient-care-header-padding: calcHeight($top-padding,$date-filter-height);
+
+
+//** tooltip overrides**//
+
+$tooltip-color:       #000;
+$tooltip-bg:  #ECEDEE;
+$tooltip-opacity: 1;
+//** Tooltip border color
+$tooltip-border-color: #DFE0E1;
+//=======================//
+
+$chosen-sprite-url: url(../Scripts/ext-modules/directives/ocDropdownSelector/chosen-sprite.png);
+$chose-sprite2x-url: url(../Scripts/ext-modules/directives/ocDropdownSelector/chosen-sprite@2x.png);
+//Dropdown override****************
+
+//** Dropdown link text color.
+$dropdown-link-color:     #000;
+//** Hover color for dropdown links.
+$dropdown-link-hover-color:    #000;
+//** Hover background for dropdown links.
+$dropdown-link-hover-bg:      #DCEAF6;
+
+//** Active dropdown menu item text color.
+$dropdown-link-active-color:   #FFFFFF;
+//** Active dropdown menu item background color.
+$dropdown-link-active-bg:       #006699;
+
+//Used in Search Control
+//$search-item-background-color:  #006699;

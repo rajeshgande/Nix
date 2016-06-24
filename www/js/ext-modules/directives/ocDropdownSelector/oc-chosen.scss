@@ -1,0 +1,58 @@
+﻿
+//========Chosen CSS override for Application App==================================//
+
+
+    .chosen-container {
+        text-align:left;
+        //font-size: $font-size-base !important;
+        min-width: 250px;
+        font-size: $font-size-base;
+            margin-top: -4px;
+    }
+    .chosen-container-single .chosen-single div b {
+        background: url('../Content/images/dropdown_grey.png') no-repeat 0 2px !important;
+        /*@media (min-width: $screen-lg) {
+            background: url('../Content/images/dropdown_grey.png') no-repeat 0 2px !important;
+        }
+
+        @media (max-width: $screen-lg) {
+            background: url('../Content/images/dropdown_grey.png') no-repeat 0 3px !important;
+        }*/
+    }
+  
+    //Style dropdown specific to dashboard page
+    .chosen-container-single .chosen-single {
+        border-radius: 0;
+        border: 1px solid $header-background-color !important;
+        background: White !important;
+        box-shadow: none !important;
+        border-bottom-color: white;
+        color: $header-background-color !important;
+
+        div {
+            margin-right: 2px;
+        }
+    }
+
+     .chosen-container-single .chosen-single span {
+        vertical-align: middle;
+    }
+
+
+    .chosen-container-single .chosen-drop {
+          margin-top: 0 ;
+          overflow: hidden;
+          white-space: nowrap;
+            /*width: auto;*/
+          -o-text-overflow: ellipsis;
+         -ms-text-overflow: ellipsis;
+          text-overflow: ellipsis;
+          // let width be inherited from parent container
+          /*width: 500px;*/
+    }
+    .chosen-drop {
+
+        width: auto;
+        min-width: 250px;
+    }
+//==========================================================================================//

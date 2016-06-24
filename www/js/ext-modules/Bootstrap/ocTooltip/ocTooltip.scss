@@ -1,0 +1,20 @@
+﻿.tooltip-arrow {
+    display: none;
+}
+
+.tooltip-inner {
+    min-width: 80px;
+    max-width: 220px;
+    border-color : $tooltip-border-color;
+    //background: linear-gradient(-90deg, rgb(235,236,237) 0%, rgb(255,255,255) 100%);
+    background-color: $tooltip-bg;//#FAFAFA;
+    background: -webkit-linear-gradient($tooltip-bg #000); 
+    background: -moz-linear-gradient($tooltip-bg #000); 
+    background: -ms-linear-gradient($tooltip-bg #000); 
+    background: -o-linear-gradient($tooltip-bg #000); 
+    border-style: solid;
+    border-width: 1px;
+    text-align: left;
+    line-height: 15px;
+    letter-spacing: 0.5px;
+}

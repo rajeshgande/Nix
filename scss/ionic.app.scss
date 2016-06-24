@@ -21,16 +21,34 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 $light:                            #fff;
 $dark:                            #363534;
 $balanced:                        #69BE28;
-$stable:                  $dark;
+$stable:                          $dark;
 $bar-stable-text:                 $light;
+
+
+
+// Include Chosen SCSS file from external module
+@import "../www/js/ext-modules/variables";
+@import "../www/js/ext-modules/directives/ocDropdownSelector/chosen";
+@import "../www/js/ext-modules/directives/ocDropdownSelector/oc-chosen";
+
+
+//External Module Variables
+$header-background-color:#5E6A71;
+$filter-background-color: $patient-background;
+$footer-background-color: $filter-area-background;
+$font-size-base:14px;
+$bar-default-bg:                  $footer-background-color;
+
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
-//$bar-default-bg:                  $dark;
+
+
 
 ion-side-menu{
     ion-content{
         background-color: #5E6A71!important;
+        
     }
     .item-content {
         background-color: #5E6A71 !important;
@@ -58,3 +76,161 @@ ion-side-menu{
 }
 
 //***************************************
+
+#cycleCount{
+
+    .list{
+        height:100%;
+    }
+    .chosen-container-single .chosen-single div b {
+            background: url('../www/img/dropdown_grey.png') no-repeat 0 2px !important;
+        }
+    #scanDiv{
+        label{
+            border-color: $balanced;
+            border-style: solid;
+            border-width:1px;
+            border-radius: 5px 0 0 5px;
+         }
+        .button{
+            margin-left:0;
+            padding:0 10px 0 10px;
+            border-radius: 0 5px 5px 0;
+            min-height:31px;
+        }
+        input{
+            width:100%;
+        }
+       
+    }
+    #cycleCountFrom{
+        .item{
+            padding-top: 5px !important;
+            padding-bottom: 5px !important;
+        }
+        
+        .bar-footer .button{
+            margin-top:0 !important;
+            margin-bottom:0 !important;
+            margin-right:auto;
+            margin-left: auto;
+            width: 200px;
+        }
+    }
+}
+
+
+  number-control{
+         .item{
+             padding-top:0;
+             padding-bottom:0;
+             border:0;
+         }        
+         .btn{
+            background: transparent;
+            min-height: 30px;
+            min-width: 20px;
+         }
+         .btn:hover, .btn:focus{
+            border-color:$header-background-color;
+            box-shadow:none;
+         }
+         .input-group-btn {
+             position: relative;
+             background:$header-background-color;
+         }
+
+         input{
+             display:inline !important;
+             //max-width: 100px  !important;
+             //border:solid  !important;
+             //border-style:double;
+            //border: $header-background-color double !important;
+            border-color: $header-background-color!important;
+            border-style: double!important;
+            border-width: 1px!important;
+             height: 30px;
+             font-weight:bold;
+         }
+         input:focus{
+             border-right-color:transparent;
+             border-left-color:transparent;
+             border-bottom-color: none;
+             box-shadow: none;
+             outline: 0 none;
+         }
+         .input-group{
+             max-width: 150px;
+         }
+         .oc-input-text{
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            //border-top: 8px solid #FFF;
+            top: 7px;
+            left: -81px;
+         }
+         .oc-unit{
+            border-bottom-style: solid;
+            border-bottom-color: $header-background-color;
+            border-bottom-width: 1px;
+            text-align: center;
+            h6{
+                margin-bottom:0;
+                background-color: #fff;
+                color: $header-background-color;
+            }
+        }
+     }
+
+
+
+  .oc-btn-arrow-up {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid #FFF;
+        top: 12px;
+        left: 21px;
+     }
+     .oc-btn-arrow-down{
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 8px solid #FFF;
+        top: 12px;
+        left: 21px;
+
+     }
+   .styled-select {
+       width: 240px;
+       height: 34px;
+       overflow: hidden;
+       background: url('../www/img/dropdown_grey.png') no-repeat 290px;
+       border: 1px solid $header-background-color;
+       background-color: #FFF;
+
+
+   }
+   .styled-select select {
+       background: transparent;
+       width: 320px;
+       padding: 0 5px 5px 5px;
+       margin-top: -5px;
+       font-size: 16px;
+       line-height: 1;
+       border: 0;
+       border-radius: 0;
+       height: 34px;
+       -webkit-appearance: none;
+   }
+   .filter{
+       background-color: $filter-background-color;
+       padding:10.66667px;
+   }
