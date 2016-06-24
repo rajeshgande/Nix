@@ -79,7 +79,7 @@ angular.module('nix.services')
 	   						});
 
 	   						// Clear out the item info
-	   						item.rawBarcode.value = "";
+	   						item.ItemBarCode = "";
 	   						item.ItemId = "";
 	   						item.FormattedGenericName = "";
 	   						item.QuantityOnHand = "";
@@ -119,7 +119,9 @@ angular.module('nix.services')
                             'x-targeturl' : targeturl
 						}
                         }).then(function successCallback(response) {
-                            var item = 	response.data;
+                            var item = response.data;
+                            item["ItemBarCode"] = barcode;
+
                              if(item===null){
                                 $ionicPopup.alert({
 	     							title: 'No item found with barcode: ' + barcode
