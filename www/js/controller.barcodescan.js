@@ -1,12 +1,12 @@
 angular.module('nix.controllers')
 .controller('barcodeScanCtrl', function($scope, $state, formData, httpService, $cordovaBarcodeScanner, $ionicPlatform, $ionicPopup) {
-	 
+     
      httpService.getAllCPs().then(function(data) {
-		  $scope.cps=data;          
+          $scope.cps=data;          
           $scope.selectedCp =  data[0]; 
-		});
+        });
            
-	$scope.item = { ItemId : "", FormattedGenericName : "", QuantityOnHand : "", ExpirationDate : "", Location : "" };
+    $scope.item = { ItemId : "", FormattedGenericName : "", QuantityOnHand : "", ExpirationDate : "", Location : "", ItemBarCode : "" };
    
     $scope.numeric_options = {
     start: function (event, ui) { console.log('numeric start'); },
@@ -23,28 +23,27 @@ angular.module('nix.controllers')
     // $scope.selectedCp =  JSON.parse(window.localStorage['SelectedCP']);
     //console.log( $scope.selectedCp);
    
-	$scope.headerText = 'Barcode Scan';
-    
-    $scope.rawBarcode = { value: "" };
-    // $scope.rawBarcode = {};  
+    $scope.headerText = 'Barcode Scanner';
+
     if (!window.cordova)
     {
         // running in dev browser mode
-        $scope.rawBarcode = {value:'1234567'};  
-        //$scope.rawBarcode = '5026859315';
+        $scope.item.ItemBarCode = '1234567';  
+        // $scope.item.ItemBarCode = '5026859315';
     }
-    		 
-    $scope.submitForm = function(item) {		
-		 formData.updateForm(item);	 
-		 httpService.updateQty(item);
-	 };
+             
+    $scope.submitForm = function(item) {        
+         formData.updateForm(item);  
+         httpService.updateQty(item);
+     };
      
      $scope.getitem = function(){   
            $scope.currentlyScanning = false;                 
             httpService
-                .getItemDetails($scope.rawBarcode.value)
+                .getItemDetails($scope.item.ItemBarCode)
                 .then(function(data) {
                     $scope.item = data;
+                    $scope.item.ExpirationDate = new Date($scope.item.ExpirationDate);
                 }); 
         };
         
@@ -64,10 +63,10 @@ angular.module('nix.controllers')
                 .scan()
                 .then(function(result) {
                     $scope.currentlyScanning = false;
-                    $scope.rawBarcode = {value:result.text};
-                    console.log("Scanned barcode: " + $scope.rawBarcode.value);                    
+                    $scope.item.ItemBarCode = result.text;
+                    console.log("Scanned barcode: " + $scope.item.ItemBarCode);                    
                     httpService
-                        .getItemDetails($scope.rawBarcode.value)
+                        .getItemDetails($scope.item.ItemBarCode)
                         .then(function(data) {
                             $scope.item=data;
                             console.log(data);
