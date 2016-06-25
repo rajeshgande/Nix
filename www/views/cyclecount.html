@@ -14,7 +14,7 @@
             
             <div id="scanDiv" class="item item-input-inset">
                 <label class="item-input-wrapper">
-                    <input type="text" placeholder="Scan Barcode"  ng-model="rawBarcode.value" ng-enter="getitem()">
+                    <input type="text" placeholder="Scan Barcode"  ng-model="item.ItemBarCode" ng-enter="getitem()">
                 </label>
                 <button class="button button-small button-balanced icon ion-ios-barcode" ng-click="scan()">
                     Scan Code
@@ -54,12 +54,12 @@
                     <input type="text" placeholder="GenericName" ng-model="item.Location">
                     <!--<span class="input-label" style="font-weight:bold">{{item.Location}}</span>-->
                 </label>
-                
+                <br>
                 <!--<label class="item item-borderless item-stacked-label" name="Location">
                     <input type="submit" class="button button-block button-balanced" value="Update Quantity">
                 </label>-->
                 <ion-footer-bar class="bar bar-footer">
-                <input type="submit" class="button button-block button-balanced" value="Update Quantity">
+                    <input type="submit" class="button button-block button-balanced" value="Update Quantity">
                 </ion-footer-bar>
             </form>
         </ion-list>

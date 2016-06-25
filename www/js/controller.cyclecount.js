@@ -27,8 +27,9 @@ angular.module('nix.controllers')
 
     if (!window.cordova)
     {
+        console.log("runnign i ndev")
         // running in dev browser mode
-        $scope.item.ItemBarCode = '1234567';  
+        $scope.item.ItemBarCode = '1234567';
         // $scope.item.ItemBarCode = '5026859315';
     }
     		 
