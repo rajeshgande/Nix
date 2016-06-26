@@ -4,9 +4,18 @@
             <ion-list>
                 <label class="item item-input" name="ServerAddress">
                     <span class="input-label">ServerAddress</span>
-                    <input type="text" placeholder="ServerAddress" ng-model="serverAddress" ng-change="onServerAddressChange()">
+                    <input type="text" placeholder="ServerAddress" ng-model="settings.serverAddress" ng-change="onServerAddressChange()">
                 </label>
-                <ion-toggle ng-model="proxycalls.checked" ng-checked="proxycalls.checked" toggle-class="toggle-assert" ng-change="onProxycallsChange()">Proxy Calls</ion-toggle>                
+                 <ion-toggle ng-model="proxycalls.checked" ng-checked="proxycalls.checked" toggle-class="toggle-assert" ng-change="onProxycallsChange()">Proxy Calls</ion-toggle>
+                  <ion-toggle ng-model="settings.demoMode" ng-checked="settings.demoMode" toggle-class="toggle-assert" ng-change="onDemoModeChange()">Demo Mode</ion-toggle>
+                  <!--<label class="item item-input" name="Proxy Calls">
+                      <span class="input-label">Proxy Calls</span>
+                <ion-toggle ng-model="proxycalls.checked" ng-checked="proxycalls.checked" toggle-class="toggle-assert" ng-change="onProxycallsChange()">Proxy Calls</ion-toggle>
+                 </label> 
+                 <label class="item item-input" name="Demo Mode">
+                     <span class="input-label">Demo Mode</span>
+                    <ion-toggle ng-model="settings.demoMode" ng-checked="settings.demoMode" toggle-class="toggle-assert" ng-change="onDemoModeChange()">Demo Mode</ion-toggle>
+                </label>                -->
             </ion-list>            
             <!--<label class="item item-select" name="Installation">
                 <span class="input-label">Installation</span>

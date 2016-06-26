@@ -3,8 +3,10 @@ angular.module('nix.controllers')
 	
     $scope.user = {};   
 
+    var showServerAddress = false;
+
     $scope.serverAddressNotPopulated = function() {
-    	return window.localStorage.getItem("baseurl") == undefined || window.localStorage['baseurl'] == "";
+    	return window.localStorage.getItem("baseurl") == undefined || window.localStorage['baseurl'] == "" || showServerAddress ;
     } 
  
 	if(window.localStorage.getItem("baseurl") == undefined || window.localStorage['baseurl'] == "") {
@@ -19,6 +21,7 @@ angular.module('nix.controllers')
 
    
    var loginFailureAlert = function(responsedata){ 
+       showServerAddress =  responsedata.status != '400';
         $ionicPopup.alert({
             title: 'Login Error',
             template: responsedata.status == '400' ? 'Invalid User Id and Password' : "Server Error"        
@@ -28,10 +31,12 @@ angular.module('nix.controllers')
 	 
 	   if (user.userId && user.password) {
 		
-        window.localStorage.setItem("baseurl", $scope.user.ServerAddress);
+        //window.localStorage.setItem("baseurl", $scope.user.ServerAddress);
         formData.updateForm(user);
 		auth.login(user, 
-            function(){ $state.go('menu.cyclecount');}, 
+            function(){
+                 showServerAddress = false;
+                 $state.go('menu.cyclecount');}, 
             loginFailureAlert
        );
          
