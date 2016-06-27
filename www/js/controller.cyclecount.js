@@ -43,8 +43,10 @@ angular.module('nix.controllers')
             httpService
                 .getItemDetails($scope.item.ItemBarCode)
                 .then(function(data) {
-                    $scope.item = data;
-                    $scope.item.ExpirationDate = new Date($scope.item.ExpirationDate);
+                    if (data) {
+                        $scope.item = data;
+                        $scope.item.ExpirationDate = new Date($scope.item.ExpirationDate);
+                    }
                 }); 
         };
         
