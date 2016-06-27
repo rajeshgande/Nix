@@ -10380,3 +10380,50 @@ number-control .oc-unit {
   background-color: #97C0E6;
   padding: 10.66667px; }
 
+#settingsPage input {
+  border-color: #5E6A71;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 0 0 0 0;
+  padding-left: 10px; }
+
+#settingsPage label {
+  padding-left: 0;
+  padding-right: 0;
+  border: 0; }
+
+#settingsPage div {
+  padding-left: 0; }
+  #settingsPage div .item-toggle {
+    border: 0; }
+
+#settingsPage .toggle-small input:checked + .track .handle {
+  left: 80px; }
+
+#settingsPage .toggle-small input:checked + .track {
+  background: #fff !important; }
+
+#settingsPage .toggle input:checked + .track {
+  border-color: #69BE28;
+  border-style: solid;
+  border-width: 1px; }
+
+#settingsPage .toggle-small input:checked + .track .handle {
+  -webkit-transform: translate3d(16px, 0, 0);
+  transform: translate3d(74px, 0, 0);
+  background: #5E6A71; }
+
+#settingsPage .toggle-small .track {
+  width: 310px;
+  height: 32px; }
+
+#settingsPage .toggle-small .handle {
+  top: 8px;
+  left: 2px;
+  width: 150px;
+  height: 26px; }
+
+#settingsPage .item-toggle .toggle {
+  position: relative;
+  left: 6px; }
+

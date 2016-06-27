@@ -246,3 +246,62 @@ ion-side-menu ion-item{
        background-color: $filter-background-color;
        padding:10.66667px;
    }
+#settingsPage{
+    input{
+        border-color: $header-background-color;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 0 0 0 0;
+        padding-left:10px;
+    }
+    label{
+        padding-left:0;
+        padding-right:0;
+        border:0;
+    }
+    div{
+        padding-left:0;
+        .item-toggle{
+            border:0;
+        }
+    }
+
+    .toggle-small input:checked + .track .handle {
+ 
+        left: 80px;
+    }
+    .toggle-small input:checked + .track {
+        background: $light!important ;// rgba(0, 150, 137, 0.5);
+    }
+    .toggle input:checked + .track {
+        border-color: $balanced;
+        //background-color: #4cd964;
+         border-style: solid;
+        border-width: 1px;
+    }
+    .toggle-small input:checked + .track .handle {
+        -webkit-transform: translate3d(16px, 0, 0);
+        transform: translate3d(74px, 0, 0);
+        background: $header-background-color;
+    }
+    .toggle-small .track {
+        width: 310px;
+        height: 32px;
+    }
+
+    .toggle-small .handle {
+        top: 8px;
+        left: 2px;
+        width: 150px;
+        height: 26px;
+        //box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+    }
+
+    .item-toggle .toggle {
+        position: relative;
+    //    top: 10px;
+    //    right: 16px;
+    //    z-index: 3;
+        left: 6px;
+    }
+}

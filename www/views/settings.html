@@ -1,8 +1,8 @@
-<ion-view title="Settings">
+<ion-view id="settingsPage" title="Settings">
     <ion-content overflow-scroll="true" padding="true" scroll="false" class="has-header">
         <form class="list">
             <ion-list>
-                <label class="item item-input" name="ServerAddress">
+                <label class="item item-input item-stacked-label" name="ServerAddress">
                     <span class="input-label">ServerAddress</span>
                     <input type="text" placeholder="ServerAddress" ng-model="settings.serverAddress" ng-change="onServerAddressChange()">
                 </label>
