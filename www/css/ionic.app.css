@@ -10270,6 +10270,17 @@ ion-side-menu .item-content {
   margin-left: auto;
   width: 200px; }
 
+ion-side-menu ion-item a img {
+  margin-right: 10px; }
+
+ion-side-menu ion-item span {
+  margin-top: -15px;
+  vertical-align: middle;
+  display: inline-block; }
+
+ion-side-menu ion-item #logout {
+  visibility: hidden; }
+
 number-control .item {
   padding-top: 0;
   padding-bottom: 0;
