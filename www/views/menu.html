@@ -15,10 +15,10 @@
         <ion-content padding="false" class="side-menu-left has-header" >
             <ion-list>
                 <ion-item ui-sref="menu.login" menu-close="" ng-show="!control.isLoggedIn"><i class='icon ion-locked'></i>&nbsp;Log In</ion-item>              
-                <ion-item ui-sref="menu.settings" menu-close="" ng-show="control.isLoggedIn" ><i class='icon ion-settings'></i>&nbsp;Settings</ion-item>
+                <ion-item ui-sref="menu.settings" menu-close="" ng-show="control.isLoggedIn" ><img src="../img/icon_Settings.png" /><span>Settings</span></ion-item>
                 <ion-item ui-sref="menu.barcodescan" menu-close="" ng-show="control.isLoggedIn"><i class='icon ion-ios-search-strong'></i>&nbsp;Scan Barcode</ion-item>
                 <ion-item ui-sref="menu.cyclecount" menu-close="" ng-show="control.isLoggedIn"><i class='icon ion-ios-cloud-upload-outline'></i>&nbsp;Cycle Count</ion-item>
-                <ion-item ui-sref="menu.logout" ng-click="logout()" menu-close="" ng-show="control.isLoggedIn"><i class="icon ion-power""></i>&nbsp;Log off</ion-item>
+                <ion-item ui-sref="menu.logout" ng-click="logout()" menu-close="" ng-show="control.isLoggedIn"><img id="logout" src="../img/icon_Settings.png" /><span>Log off</span></ion-item>
             </ion-list>
         </ion-content>
 

@@ -38,7 +38,7 @@ $filter-background-color: $patient-background;
 $footer-background-color: $filter-area-background;
 $font-size-base:14px;
 $bar-default-bg:                  $footer-background-color;
-
+//$popup-background-color: $filter-background-color;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
@@ -119,7 +119,19 @@ ion-side-menu{
     }
 }
 
-
+ion-side-menu ion-item{
+    a img{
+        margin-right: 10px;
+    }
+    span{
+        margin-top: -15px;
+        vertical-align: middle;
+        display: inline-block;
+    }
+    #logout{
+        visibility:hidden;
+    }
+}
   number-control{
          .item{
              padding-top:0;
