@@ -31,7 +31,7 @@ angular.module('nix.controllers')
 	 
 	   if (user.userId && user.password) {
 		
-        //window.localStorage.setItem("baseurl", $scope.user.ServerAddress);
+        window.localStorage.setItem("baseurl", $scope.user.ServerAddress);
         formData.updateForm(user);
 		auth.login(user, 
             function(){

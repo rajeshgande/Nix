@@ -4,12 +4,18 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta http-equiv="Content-Security-Policy"
+      content="script-src * 'unsafe-eval';
+                      connect-src * 'unsafe-eval';
+                      object-src 'self';
+                      style-src * 'unsafe-inline';
+                      img-src *">
     <title></title>
 
     <!--<link href="lib/ionic/css/ionic.css" rel="stylesheet">-->
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/jquery-ui.css" rel="stylesheet">
-     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <!--<link href="css/style.css" rel="stylesheet">-->
+    <!--<link href="css/jquery-ui.css" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">-->
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
