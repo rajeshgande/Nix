@@ -2,8 +2,11 @@ angular.module('nix.controllers')
 .controller('cycleCountCtrl', function($scope, $state, formData, httpService, $cordovaBarcodeScanner, $ionicPlatform, $ionicPopup) {
 	 
      httpService.getAllCPs().then(function(data) {
-		  $scope.cps=data;          
+		  $scope.cps=data;
           $scope.selectedCp =  data[0]; 
+          window.localStorage['SelectedCP'] = $scope.selectedCp;
+          window.localStorage['omnisiteid'] = $scope.selectedCp.OmniSiteId;
+          window.localStorage['omniIpAddress'] = $scope.selectedCp.IpAddress;
 		});
            
 	$scope.item = { ItemId : "", FormattedGenericName : "", QuantityOnHand : "", ExpirationDate : "", Location : "", ItemBarCode : "" };
