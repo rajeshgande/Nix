@@ -83,7 +83,7 @@ ion-side-menu{
         height:100%;
     }
     .chosen-container-single .chosen-single div b {
-            background: url('../www/img/dropdown_grey.png') no-repeat 0 2px !important;
+            background: url('../img/dropdown_grey.png') no-repeat 0 2px !important;
         }
     #scanDiv{
         label{
@@ -233,7 +233,7 @@ ion-side-menu ion-item{
            max-width: 316px;
        height: 34px;
        overflow: hidden;
-       background: url('../www/img/dropdown_grey.png') no-repeat 290px;
+       background: url('../img/dropdown_grey.png') no-repeat 290px;
        border: 1px solid $header-background-color;
        background-color: #FFF;
        @media (min-width: $screen-sm-min) {

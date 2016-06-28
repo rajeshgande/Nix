@@ -10242,7 +10242,7 @@ ion-side-menu .item-content {
   height: 100%; }
 
 #cycleCount .chosen-container-single .chosen-single div b {
-  background: url("../www/img/dropdown_grey.png") no-repeat 0 2px !important; }
+  background: url("../img/dropdown_grey.png") no-repeat 0 2px !important; }
 
 #cycleCount #scanDiv label {
   border-color: #69BE28;
@@ -10368,7 +10368,7 @@ number-control .oc-unit {
   max-width: 316px;
   height: 34px;
   overflow: hidden;
-  background: url("../www/img/dropdown_grey.png") no-repeat 290px;
+  background: url("../img/dropdown_grey.png") no-repeat 290px;
   border: 1px solid #5E6A71;
   background-color: #FFF; }
 
