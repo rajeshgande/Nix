@@ -104,6 +104,14 @@ ion-side-menu{
        
     }
     #cycleCountFrom{
+
+        #expDate{
+            text-align: center;
+            margin-right: auto;
+            margin-left: auto;
+               border: 1px solid $header-background-color;
+                   width: 100%;
+        }
         .item{
             padding-top: 5px !important;
             padding-bottom: 5px !important;
@@ -222,12 +230,15 @@ ion-side-menu ion-item{
      }
    .styled-select {
        width: 240px;
+           max-width: 316px;
        height: 34px;
        overflow: hidden;
        background: url('../www/img/dropdown_grey.png') no-repeat 290px;
        border: 1px solid $header-background-color;
        background-color: #FFF;
-
+       @media (min-width: $screen-sm-min) {
+          
+        }
 
    }
    .styled-select select {
@@ -304,4 +315,24 @@ ion-side-menu ion-item{
     //    z-index: 3;
         left: 6px;
     }
+}
+
+//******** Login*******
+
+.item-login-omnicell-block {
+    background-color: #363534;
+    background-image: url("../img/OmnicellLogo_White.png");
+    background-repeat: no-repeat;
+    background-position: center;   
+    height:100px;
+    text-align: center;
+    position: relative;
+}
+
+.item-login-omnicell-block span {
+   position: absolute;
+   bottom: 10px;   
+   font-style: italic;
+   font-weight: bold;
+   font-size: 10pt;
 }

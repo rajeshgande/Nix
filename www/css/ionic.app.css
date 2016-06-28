@@ -10259,6 +10259,13 @@ ion-side-menu .item-content {
 #cycleCount #scanDiv input {
   width: 100%; }
 
+#cycleCount #cycleCountFrom #expDate {
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+  border: 1px solid #5E6A71;
+  width: 100%; }
+
 #cycleCount #cycleCountFrom .item {
   padding-top: 5px !important;
   padding-bottom: 5px !important; }
@@ -10358,6 +10365,7 @@ number-control .oc-unit {
 
 .styled-select {
   width: 240px;
+  max-width: 316px;
   height: 34px;
   overflow: hidden;
   background: url("../img/dropdown_grey.png") no-repeat 290px;
@@ -10426,4 +10434,20 @@ number-control .oc-unit {
 #settingsPage .item-toggle .toggle {
   position: relative;
   left: 6px; }
+
+.item-login-omnicell-block {
+  background-color: #363534;
+  background-image: url("../../img/OmnicellLogo_White.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100px;
+  text-align: center;
+  position: relative; }
+
+.item-login-omnicell-block span {
+  position: absolute;
+  bottom: 10px;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 10pt; }
 

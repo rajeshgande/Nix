@@ -1,19 +1,2 @@
 /* Empty. Add your own CSS if you like */
 
-.item-login-omnicell-block {
-    background-color: #363534;
-    background-image: url("../img/OmnicellLogo_White.png");
-    background-repeat: no-repeat;
-    background-position: center;   
-    height:100px;
-    text-align: center;
-    position: relative;
-}
-
-.item-login-omnicell-block span {
-   position: absolute;
-   bottom: 10px;   
-   font-style: italic;
-   font-weight: bold;
-   font-size: 10pt;
-}
