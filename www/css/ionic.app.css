@@ -10268,9 +10268,12 @@ ion-side-menu .item-content {
   padding-top: 5px !important;
   padding-bottom: 5px !important; }
 
+#cycleCount #cycleCountFrom .bar-footer {
+  height: 20px; }
+
 #cycleCount #cycleCountFrom .bar-footer .button {
   margin-top: 0 !important;
-  margin-bottom: 0 !important;
+  margin-bottom: 0px !important;
   margin-right: auto;
   margin-left: auto;
   width: 200px; }
