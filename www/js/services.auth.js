@@ -45,7 +45,7 @@ angular.module('nix.services')
 							'OCClientContext': '{   "ProductName" : "CP",   "PartnerProductId" : "",   "OmniCenterInstallation" : "CPC01",   "TimeStamp" : "06/26/2016 19:40:05"  }', 
 						'Content-Type': 'application/x-www-form-urlencoded'
 						},
-						data: 'UserName='+ encodeURIComponent(loggindata.userId)+'&Password='+ encodeURIComponent(loggindata.password) + '&grant_type=password'
+						data: 'UserName='+ encodeURIComponent(loggindata.userId)+'&Password='+ encodeURIComponent(loggindata.password) + '&grant_type=password&scope=CP'
 							}).then(function successCallback(response) {
 								console.log(response.data)
 								window.localStorage['token'] = response.data.access_token;
