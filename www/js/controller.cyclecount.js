@@ -69,6 +69,7 @@ angular.module('nix.controllers')
                 .scan()
                 .then(function(result) {
                     $scope.currentlyScanning = false;
+                    $scope.item = { ItemId : "", FormattedGenericName : "", QuantityOnHand : "", ExpirationDate : "", Location : "", ItemBarCode : "" };
                     $scope.item.ItemBarCode = result.text;
                     console.log("Scanned barcode: " + $scope.item.ItemBarCode);                    
                     httpService
