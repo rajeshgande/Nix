@@ -1,7 +1,7 @@
 angular.module('nix.controllers')
-.controller('LogInCtrl', function($scope, $state, $http, formData, auth, $rootScope, $ionicPopup) {
+.controller('LogInCtrl', function($scope, $state, auth, $rootScope, $ionicPopup) {
 	
-    $scope.user = {};   
+    $scope.user = {};
 
     var showServerAddress = false;
 
@@ -9,17 +9,16 @@ angular.module('nix.controllers')
     	return window.localStorage.getItem("baseurl") == undefined || window.localStorage['baseurl'] == "" || showServerAddress ;
     } 
  
-	if(window.localStorage.getItem("baseurl") == undefined || window.localStorage['baseurl'] == "") {
+	if($scope.serverAddressNotPopulated) {
     	window.localStorage['baseurl'] =  'https://omninix.omnicellanalytics.com:40405';
     }
         
-     if(window.localStorage.getItem("proxycalls") == undefined || window.localStorage['proxycalls'] == "") {
-           window.localStorage['proxycalls'] =  true;
-        }
+    if(window.localStorage.getItem("proxycalls") == undefined || window.localStorage['proxycalls'] == "") {
+        window.localStorage['proxycalls'] =  true;
+    }
     
-    $scope.user.ServerAddress = window.localStorage['baseurl'];	
-
-   
+    $scope.user.ServerAddress = window.localStorage['baseurl'];
+    
    var loginFailureAlert = function(responsedata){ 
        showServerAddress =  responsedata.status != '400';
         $ionicPopup.alert({
@@ -32,7 +31,7 @@ angular.module('nix.controllers')
 	   if (user.userId && user.password) {
 		
         window.localStorage.setItem("baseurl", $scope.user.ServerAddress);
-        formData.updateForm(user);
+        //formData.updateForm(user);
 		auth.login(user, 
             function(){
                  showServerAddress = false;
