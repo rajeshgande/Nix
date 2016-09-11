@@ -1,15 +1,15 @@
 angular.module('nix.controllers')
 .controller('LogInCtrl', function($scope, $state, auth, $rootScope, $ionicPopup) {
-	
-    $scope.user = {};
+    var vm = this;
+    
+    vm.user = {};
+    vm.showServerAddress = false;
 
-    var showServerAddress = false;
-
-    $scope.serverAddressNotPopulated = function() {
-    	return window.localStorage.getItem("baseurl") == undefined || window.localStorage['baseurl'] == "" || showServerAddress ;
+    vm.serverAddressNotPopulated = function() {
+    	return window.localStorage.getItem("baseurl") == undefined || window.localStorage['baseurl'] == "" || vm.showServerAddress ;
     } 
  
-	if($scope.serverAddressNotPopulated) {
+	if(vm.serverAddressNotPopulated) {
     	window.localStorage['baseurl'] =  'https://omninix.omnicellanalytics.com:40405';
     }
         
@@ -17,24 +17,23 @@ angular.module('nix.controllers')
         window.localStorage['proxycalls'] =  true;
     }
     
-    $scope.user.ServerAddress = window.localStorage['baseurl'];
+    vm.ServerAddress = window.localStorage['baseurl'];
     
    var loginFailureAlert = function(responsedata){ 
-       showServerAddress =  responsedata.status != '400';
+       vm.showServerAddress =  responsedata.status != '400';
         $ionicPopup.alert({
             title: 'Login Error',
             template: responsedata.status == '400' ? 'Invalid User Id and Password' : "Server Error"        
    });};
 		 
-	 $scope.submitForm = function(user) {	
+	 vm.doLogin = function(user) {	
 	 
 	   if (user.userId && user.password) {
 		
-        window.localStorage.setItem("baseurl", $scope.user.ServerAddress);
-        //formData.updateForm(user);
-		auth.login(user, 
+        window.localStorage.setItem("baseurl", vm.ServerAddress);
+        auth.login(user, 
             function(){
-                 showServerAddress = false;
+                 vm.showServerAddress = false;
                  $state.go('menu.cyclecount');}, 
             loginFailureAlert
        );
@@ -43,8 +42,7 @@ angular.module('nix.controllers')
             isLoggedIn: true
         };	 
 		
-        console.log("Logging In ", user);
-         
+        console.log("Logging In ", user);         
 		
 	   } else {
            //An alert dialog          

@@ -1,5 +1,5 @@
 // Karma configuration
-// Generated on Wed Sep 07 2016 19:28:40 GMT-0700 (Pacific Daylight Time)
+// Generated on Sat Sep 10 2016 22:27:19 GMT-0700 (Pacific Daylight Time)
 
 module.exports = function(config) {
   config.set({
@@ -14,7 +14,7 @@ module.exports = function(config) {
 
 
     // list of files / patterns to load in the browser
-    files: [
+     files: [
       '../www/lib/ionic/js/ionic.bundle.js',
       '../www/lib/angular-animate/angular-animate.js',
       '../www/lib/angular-mocks/angular-mocks.js',     
@@ -26,10 +26,12 @@ module.exports = function(config) {
       '../www/js/**/*.js',      
       'unit-tests/**/*.js'
     ],
-     
+
+
     // list of files to exclude
     exclude: [
     ],
+
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
@@ -57,7 +59,7 @@ module.exports = function(config) {
 
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: true,
+    autoWatch: false,
 
 
     // start these browsers
@@ -67,7 +69,7 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false,
+    singleRun: true,
 
     // Concurrency level
     // how many browser should be started simultaneous
