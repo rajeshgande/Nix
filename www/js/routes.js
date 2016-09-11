@@ -26,17 +26,8 @@ angular.module('nix.routes', [])
                         controller: 'LogInCtrl'
                     }
                 }
-            })
-            .state('menu.cplist', {
-                url: '/cplist',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'views/cplist.html',
-                        controller: 'cplistCtrl'
-                    }
-                }
-            })            
-             .state('menu.cyclecount', {
+            })                  
+            .state('menu.cyclecount', {
                 cache: false,
                 url: "/cyclecount",
                   views: {
@@ -56,23 +47,6 @@ angular.module('nix.routes', [])
                     }
                 }
             })
-            
-            // .state('login', {
-            //     url: "/login",
-            //     templateUrl: "views/login.html",
-            //     controller: 'LogInCtrl'
-            // })
-            // .state('landing', {
-            //     url: "/landing",
-            //     templateUrl: "views/landing.html",
-            //     controller: 'LandingCtrl'
-            // })
-            // .state('itementry', {
-            //     url: "/itementry",
-            //     templateUrl: "views/itementry.html",
-            //     controller: 'ItemEntryCtrl'
-            // })
-           
         $urlRouterProvider.otherwise('/menu/login');
     })
 ;

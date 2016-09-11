@@ -1,81 +1,83 @@
 angular.module('nix.controllers')
-.controller('cycleCountCtrl', function($scope, $state, formData, httpService, $cordovaBarcodeScanner, $ionicPlatform, $ionicPopup) {
-	 
+.controller('cycleCountCtrl', function($scope, $state, httpService, $cordovaBarcodeScanner, $ionicPlatform, $ionicPopup) {
+	 var vm = this;
+
      httpService.getAllCPs().then(function(data) {
-		  $scope.cps=data;
-          $scope.selectedCp =  data[0]; 
-          window.localStorage['SelectedCP'] = $scope.selectedCp;
-          window.localStorage['omnisiteid'] = $scope.selectedCp.OmniSiteId;
-          window.localStorage['omniIpAddress'] = $scope.selectedCp.IpAddress;
+		  vm.cps=data;
+          vm.selectedCp =  data[0]; 
+          window.localStorage['SelectedCP'] = vm.selectedCp;
+          window.localStorage['omnisiteid'] = vm.selectedCp.OmniSiteId;
+          window.localStorage['omniIpAddress'] = vm.selectedCp.IpAddress;
 		});
            
-	$scope.item = { ItemId : "", FormattedGenericName : "", QuantityOnHand : "", ExpirationDate : "", Location : "", ItemBarCode : "" };
+	vm.item = { ItemId : "", FormattedGenericName : "", QuantityOnHand : "", ExpirationDate : "", Location : "", ItemBarCode : "" };
    
+   /*
     $scope.numeric_options = {
     start: function (event, ui) { console.log('numeric start'); },
     spin: function (event, ui) { console.log('numeric spin'); }
     }
-    
+    */
   
-    $scope.setCpSelection = function(cp) {
+    vm.setCpSelection = function(cp) {
         window.localStorage['SelectedCP'] = cp;
         window.localStorage['omnisiteid'] = cp.OmniSiteId;
         window.localStorage['omniIpAddress'] = cp.IpAddress;                
      };
 
-    // $scope.selectedCp =  JSON.parse(window.localStorage['SelectedCP']);
-    //console.log( $scope.selectedCp);
+    // vm.selectedCp =  JSON.parse(window.localStorage['SelectedCP']);
+    //console.log( vm.selectedCp);
    
-	$scope.headerText = 'Cycle Count';
+	vm.headerText = 'Cycle Count';
 
     if (!window.cordova)
     {
         console.log("runnign i ndev")
         // running in dev browser mode
-        $scope.item.ItemBarCode = '1234567';
-        // $scope.item.ItemBarCode = '5026859315';
+        vm.item.ItemBarCode = '1234567';
+        // vm.item.ItemBarCode = '5026859315';
     }
     		 
-    $scope.submitForm = function(item) {		
+    vm.submitForm = function(item) {		
 		 formData.updateForm(item);	 
 		 httpService.updateQty(item);
 	 };
      
-     $scope.getitem = function(){   
-           $scope.currentlyScanning = false;                 
+     vm.getitem = function(){   
+           vm.currentlyScanning = false;                 
             httpService
-                .getItemDetails($scope.item.ItemBarCode)
+                .getItemDetails(vm.item.ItemBarCode)
                 .then(function(data) {
                     if (data) {
-                        $scope.item = data;
-                        $scope.item.ExpirationDate = new Date($scope.item.ExpirationDate);
+                        vm.item = data;
+                        vm.item.ExpirationDate = new Date(vm.item.ExpirationDate);
                     }
                 }); 
         };
         
-     if ($scope.currentlyScanning === true) {           
+     if (vm.currentlyScanning === true) {           
             return;
       }
      else if (!window.cordova) {
          // running in dev browser mode
-        $scope.currentlyScanning = false;        
-        $scope.scan =  $scope.getitem;
+        vm.currentlyScanning = false;        
+        vm.scan =  vm.getitem;
     } else {
-        $scope.currentlyScanning = true;
+        vm.currentlyScanning = true;
         // running in mobile device  
-        $scope.scan = function(){
+        vm.scan = function(){
             $ionicPlatform.ready(function() {
                 $cordovaBarcodeScanner
                 .scan()
                 .then(function(result) {
-                    $scope.currentlyScanning = false;
-                    $scope.item = { ItemId : "", FormattedGenericName : "", QuantityOnHand : "", ExpirationDate : "", Location : "", ItemBarCode : "" };
-                    $scope.item.ItemBarCode = result.text;
-                    console.log("Scanned barcode: " + $scope.item.ItemBarCode);                    
+                    vm.currentlyScanning = false;
+                    vm.item = { ItemId : "", FormattedGenericName : "", QuantityOnHand : "", ExpirationDate : "", Location : "", ItemBarCode : "" };
+                    vm.item.ItemBarCode = result.text;
+                    console.log("Scanned barcode: " + vm.item.ItemBarCode);                    
                     httpService
-                        .getItemDetails($scope.item.ItemBarCode)
+                        .getItemDetails(vm.item.ItemBarCode)
                         .then(function(data) {
-                            $scope.item=data;
+                            vm.item=data;
                             console.log(data);
                             });                    
                 }, function(error) {

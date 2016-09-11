@@ -6,10 +6,11 @@ angular.module('nix.controllers')
     vm.showServerAddress = false;
 
     vm.serverAddressNotPopulated = function() {
-    	return window.localStorage.getItem("baseurl") == undefined || window.localStorage['baseurl'] == "" || vm.showServerAddress ;
+    	return (window.localStorage.getItem("baseurl") == undefined || window.localStorage['baseurl'] == "") || vm.showServerAddress ;
     } 
- 
-	if(vm.serverAddressNotPopulated) {
+  
+  console.log('base url:' + window.localStorage['baseurl']);
+	if(vm.serverAddressNotPopulated()) {
     	window.localStorage['baseurl'] =  'https://omninix.omnicellanalytics.com:40405';
     }
         
@@ -17,7 +18,7 @@ angular.module('nix.controllers')
         window.localStorage['proxycalls'] =  true;
     }
     
-    vm.ServerAddress = window.localStorage['baseurl'];
+    vm.serverAddress = window.localStorage['baseurl'];
     
    var loginFailureAlert = function(responsedata){ 
        vm.showServerAddress =  responsedata.status != '400';
@@ -26,12 +27,12 @@ angular.module('nix.controllers')
             template: responsedata.status == '400' ? 'Invalid User Id and Password' : "Server Error"        
    });};
 		 
-	 vm.doLogin = function(user) {	
+	 vm.doLogin = function() {	
 	 
-	   if (user.userId && user.password) {
+	   if (vm.user.userId && vm.user.password) {
 		
-        window.localStorage.setItem("baseurl", vm.ServerAddress);
-        auth.login(user, 
+        window.localStorage.setItem("baseurl", vm.serverAddress);
+        auth.login(vm.user, 
             function(){
                  vm.showServerAddress = false;
                  $state.go('menu.cyclecount');}, 
@@ -42,7 +43,7 @@ angular.module('nix.controllers')
             isLoggedIn: true
         };	 
 		
-        console.log("Logging In ", user);         
+        console.log("Logging In ", vm.user);         
 		
 	   } else {
            //An alert dialog          
