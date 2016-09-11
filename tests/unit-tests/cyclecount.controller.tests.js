@@ -42,8 +42,24 @@ describe('CycleCount Controller Tests', function(){
         };
     
     ionicPopupMock = jasmine.createSpyObj('$ionicPopup spy', ['alert']);
-    scannerMock = jasmine.createSpyObj('$cordovaBarcodeScanner spy', ['scan']);
-    ionicPlatformMock = jasmine.createSpyObj('$ionicPlatform spy', ['ready']);
+   
+    ionicPlatformMock = {
+        ready: function(callback){callback()}
+            };
+    
+     scannerMock = {
+         scan:jasmine.createSpy('scan spy')
+                        .and.callFake(function () {
+                    return {
+                        then: function (callback, callback2) {
+                            //callback('1234');
+                            callback2();
+                            return callback('1234');
+                        } 
+                    }    
+            }),
+     }
+     
 
     controller = $controller('CycleCountCtrl', { 
                         $scope: scopeMock,
@@ -53,6 +69,18 @@ describe('CycleCount Controller Tests', function(){
                         '$ionicPlatform': ionicPlatformMock           
                         } );
     }));
+
+    it('Scan calls ionicPlatform if it is running in mobile', function(){
+        // controller.item = {ItemBarCode:"1234"};
+         controller.isRunningInBrowser = false;
+         controller.scan();      
+         expect(controller.currentlyScanning).toEqual(false);
+         expect(scannerMock.scan).toHaveBeenCalled();
+         expect(controller.item.ItemBarCode).toEqual('1234');
+         expect(httpServiceMock.getItemDetails).toHaveBeenCalled();         
+         expect(ionicPopupMock.alert).toHaveBeenCalled();
+
+    });
   
     it('Gets cp list and sets default selection', function(){
 
@@ -97,11 +125,5 @@ describe('CycleCount Controller Tests', function(){
          expect(httpServiceMock.getItemDetails).not.toHaveBeenCalled();
     });  
 
-   it('Scan calls ionicPlatform if it is running in mobile', function(){
-         controller.item = {ItemBarCode:"1234"};
-         controller.isRunningInBrowser = false;
-         controller.scan();      
-         expect(controller.currentlyScanning).toEqual(true);
-         expect(ionicPlatformMock.ready).toHaveBeenCalled();
-    });
+   
 });

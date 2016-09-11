@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">76.74% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>33/43</span>
+        <span class='fraction'>43/43</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">75% </span>
@@ -30,18 +30,18 @@
         <span class='fraction'>6/8</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">63.64% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>7/11</span>
+        <span class='fraction'>11/11</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">76.74% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>33/43</span>
+        <span class='fraction'>43/43</span>
       </div>
     </div>
   </div>
-  <div class='status-line medium'></div>
+  <div class='status-line high'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -179,22 +179,22 @@
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -256,23 +256,23 @@
             } else {
                 vm.currentlyScanning = true;
                 console.log('running in mobile device');      
-                $ionicPlatform.ready(<span class="fstat-no" title="function not covered" >function() {</span>
-<span class="cstat-no" title="statement not covered" >                    $cordovaBarcodeScanner</span>
+                $ionicPlatform.ready(function() {
+                    $cordovaBarcodeScanner
                     .scan()
-                    .then(<span class="fstat-no" title="function not covered" >function(result) {</span>
-<span class="cstat-no" title="statement not covered" >                        vm.currentlyScanning = false;</span>
-<span class="cstat-no" title="statement not covered" >                        vm.item = { ItemId : "", FormattedGenericName : "", QuantityOnHand : "", ExpirationDate : "", Location : "", ItemBarCode : "" };</span>
-<span class="cstat-no" title="statement not covered" >                        vm.item.ItemBarCode = result.text;</span>
-<span class="cstat-no" title="statement not covered" >                        console.log("Scanned barcode: " + vm.item.ItemBarCode);                    </span>
-<span class="cstat-no" title="statement not covered" >                        httpService</span>
+                    .then(function(result) {
+                        vm.currentlyScanning = false;
+                        vm.item = { ItemId : "", FormattedGenericName : "", QuantityOnHand : "", ExpirationDate : "", Location : "", ItemBarCode : "" };
+                        vm.item.ItemBarCode = result.text;
+                        console.log("Scanned barcode: " + vm.item.ItemBarCode);                    
+                        httpService
                             .getItemDetails(vm.item.ItemBarCode)
-                            .then(<span class="fstat-no" title="function not covered" >function(data) {</span>
-<span class="cstat-no" title="statement not covered" >                                vm.item=data;</span>
-<span class="cstat-no" title="statement not covered" >                                console.log(data);</span>
+                            .then(function(data) {
+                                vm.item=data;
+                                console.log(data);
                                 });                    
-                    }, <span class="fstat-no" title="function not covered" >function(error) {</span>
-<span class="cstat-no" title="statement not covered" >                        $ionicPopup.alert({ title: 'Error: ' + error });</span>
-<span class="cstat-no" title="statement not covered" >                        console.log('Error: ' + error);</span>
+                    }, function(error) {
+                        $ionicPopup.alert({ title: 'Error: ' + error });
+                        console.log('Error: ' + error);
                     });
                 });
             }
@@ -283,7 +283,7 @@
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sun Sep 11 2016 12:31:32 GMT-0700 (Pacific Daylight Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sun Sep 11 2016 16:57:38 GMT-0700 (Pacific Daylight Time)
 </div>
 </div>
 <script src="../prettify.js"></script>
