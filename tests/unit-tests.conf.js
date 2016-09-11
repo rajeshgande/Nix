@@ -27,6 +27,8 @@ module.exports = function(config) {
       'unit-tests/**/*.js'
     ],
 
+// 'unit-tests/login.controller.tests.js.js'
+// 'unit-tests/**/*.js'
 
     // list of files to exclude
     exclude: [
@@ -38,12 +40,12 @@ module.exports = function(config) {
     preprocessors: {
     },
 
+    // plugins: ['karma-spec-reporter'],
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
-
+    reporters: ['spec'],
 
     // web server port
     port: 9876,
@@ -64,7 +66,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
 
 
     // Continuous Integration mode

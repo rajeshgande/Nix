@@ -1,7 +1,6 @@
-describe('Controllers', function(){
+describe('LogIn Controller Tests', function(){
   
-   var controller, 
-        abc,
+   var controller,
         authServiceMock,
         stateMock,
         ionicPopupMock,
@@ -41,19 +40,19 @@ describe('Controllers', function(){
                             'auth': authServiceMock,
                             '$ionicPopup': ionicPopupMock                    
                             } );
-        //console.log(controller.user.ServerAddress);
     }));
 
     // tests start here
     it('should have server address populated', function(){       
         expect(controller.serverAddressNotPopulated()).toEqual(false);
-        expect(controller.ServerAddress).toEqual('https://omninix.omnicellanalytics.com:40405');
+        expect(controller.serverAddress).toEqual('https://omninix.omnicellanalytics.com:40405');
         expect(window.localStorage['baseurl']).toEqual('https://omninix.omnicellanalytics.com:40405');    
     });
   
     it('doLogin Sucessful', function(){ 
-        var user = {userId:'abc', password:'abc'}
-        controller.doLogin(user);
+        controller.user = {userId:'abc', password:'abc'}
+        controller.doLogin();
+
         expect(authServiceMock.loginWasCalled).toEqual(true);
         expect(stateMock.go).toHaveBeenCalledWith('menu.cyclecount');
         expect(controller.showServerAddress).toEqual(false);
@@ -61,9 +60,9 @@ describe('Controllers', function(){
     });
 
      it('doLogin UnSucessful', function(){ 
-         var user = {userId:'abc', password:'abc'}
+        controller.user = {userId:'abc', password:'abc'}
         authServiceMock.sucesslogin = false;
-        controller.doLogin(user);
+        controller.doLogin();
 
         expect(authServiceMock.loginWasCalled).toEqual(true); 
         expect(controller.showServerAddress).toEqual(true);  
@@ -71,8 +70,8 @@ describe('Controllers', function(){
     });
 
     it('doLogin requires userid and password', function(){ 
-        var user = {};
-        controller.doLogin(user);
+        controller.user = {};
+        controller.doLogin();
         expect(authServiceMock.loginWasCalled).toEqual(false);    
         expect(ionicPopupMock.alert).toHaveBeenCalled();
     });

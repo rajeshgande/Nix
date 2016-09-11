@@ -1,5 +1,5 @@
 angular.module('nix.controllers')
-.controller('cycleCountCtrl', function($scope, $state, httpService, $cordovaBarcodeScanner, $ionicPlatform, $ionicPopup) {
+.controller('CycleCountCtrl', function($scope, httpService, $cordovaBarcodeScanner, $ionicPlatform, $ionicPopup) {
 	 var vm = this;
 
      httpService.getAllCPs().then(function(data) {
@@ -12,13 +12,6 @@ angular.module('nix.controllers')
            
 	vm.item = { ItemId : "", FormattedGenericName : "", QuantityOnHand : "", ExpirationDate : "", Location : "", ItemBarCode : "" };
    
-   /*
-    $scope.numeric_options = {
-    start: function (event, ui) { console.log('numeric start'); },
-    spin: function (event, ui) { console.log('numeric spin'); }
-    }
-    */
-  
     vm.setCpSelection = function(cp) {
         window.localStorage['SelectedCP'] = cp;
         window.localStorage['omnisiteid'] = cp.OmniSiteId;
@@ -27,8 +20,6 @@ angular.module('nix.controllers')
 
     // vm.selectedCp =  JSON.parse(window.localStorage['SelectedCP']);
     //console.log( vm.selectedCp);
-   
-	vm.headerText = 'Cycle Count';
 
     if (!window.cordova)
     {
