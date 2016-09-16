@@ -17,7 +17,24 @@ angular.module('nix.controllers')
            
 	vm.item = { ItemId : "", FormattedGenericName : "", QuantityOnHand : "", ExpirationDate : "", Location : "", ItemBarCode : "" };
    
-    
+    vm.changeExpDateInput = function(dateType) {
+        // Default first
+        vm.dateShow = false;
+        vm.monthShow = false;
+        vm.datetimeShow = false;
+        vm.noneDateShow = false;
+
+        // console.log("printing out: -" + dateType + "-");
+        if (dateType == 'undefined' || dateType === "None") {
+            vm.noneDateShow = true;
+        } else if (dateType == "1") {
+            vm.dateShow = true;
+        } else if (dateType == "2") {
+            vm.monthShow = true;
+        } else if (dateType == "3") {
+            vm.datetimeShow = true;
+        }
+    };
 
     // vm.selectedCp =  JSON.parse(window.localStorage['SelectedCP']);
     //console.log( vm.selectedCp);
@@ -25,7 +42,7 @@ angular.module('nix.controllers')
     if (!$window.cordova)
     {
         console.log("runnign in dev mode")
-        vm.item.ItemBarCode = '1234567';
+        vm.item.ItemBarCode = '1234';
         vm.isRunningInBrowser = true;        
     }
     		 
@@ -33,17 +50,22 @@ angular.module('nix.controllers')
 		 httpService.updateQty(vm.item);
 	 };
      
-     vm.getitem = function(){   
-           vm.currentlyScanning = false;                 
-            httpService
-                .getItemDetails(vm.item.ItemBarCode)
-                .then(function(data) {
-                    if (data) {
-                        vm.item = data;
-                        vm.item.ExpirationDate = new Date(vm.item.ExpirationDate);
-                    }
-                }); 
-        };
+    vm.getitem = function(){   
+        vm.currentlyScanning = false;                 
+        httpService
+            .getItemDetails(vm.item.ItemBarCode)
+            .then(function(data) {
+                vm.mapItemData(data);
+            }); 
+    };
+
+    vm.mapItemData = function(data) {
+        if (data) {
+            vm.item = data;
+            vm.item.ExpirationDate = new Date(vm.item.ExpirationDate);
+            vm.changeExpDateInput(data.ExpirationDateGranularity);
+        }
+    }
         
     vm.scan = function(){
         if (vm.currentlyScanning === true) {           

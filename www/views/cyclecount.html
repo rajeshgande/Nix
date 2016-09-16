@@ -36,7 +36,10 @@
                 <number-control quantity="vm.item.QuantityOnHand" max="999" controlid="order-1" indexid="3"></number-control>
                 <label class="item item-borderless item-stacked-label" name="ExpirationDate">
                     <span class="input-label">EXP Date</span>
-                    <input id="expDate" type="date" placeholder="ExpirationDate" ng-model="vm.item.ExpirationDate">
+                    <input id="expDate" type="datetime-local" placeholder="ExpirationDate" ng-model="vm.item.ExpirationDate" ng-show="vm.noneDateShow">
+                    <input id="expDate" type="date" placeholder="ExpirationDate" ng-model="vm.item.ExpirationDate" ng-show="vm.dateShow">
+                    <input id="expDate" type="month" placeholder="ExpirationDate" ng-model="vm.item.ExpirationDate" ng-show="vm.monthShow">
+                    <input id="expDate" type="datetime-local" placeholder="ExpirationDate" ng-model="vm.item.ExpirationDate" ng-show="vm.datetimeShow">
                 </label>
                 <label class="item item-borderless item-stacked-label" name="Location">
                     <span class="input-label">Location</span>
