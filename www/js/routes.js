@@ -33,7 +33,7 @@ angular.module('nix.routes', [])
                   views: {
                     'menuContent': {
                         templateUrl: 'views/cyclecount.html',
-                        controller: 'cycleCountCtrl'
+                        controller: 'CycleCountCtrl'
                     }
                 }
             })
