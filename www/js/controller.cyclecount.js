@@ -24,14 +24,13 @@ angular.module('nix.controllers')
         vm.datetimeShow = false;
         vm.noneDateShow = false;
 
-        // console.log("printing out: -" + dateType + "-");
         if (dateType == 'undefined' || dateType === "None") {
             vm.noneDateShow = true;
-        } else if (dateType == "1") {
+        } else if (dateType == "Day") {
             vm.dateShow = true;
-        } else if (dateType == "2") {
+        } else if (dateType == "Month") {
             vm.monthShow = true;
-        } else if (dateType == "3") {
+        } else if (dateType == "Time") {
             vm.datetimeShow = true;
         }
     };
