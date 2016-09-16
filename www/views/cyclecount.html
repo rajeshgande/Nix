@@ -7,8 +7,8 @@
                 <div class="col styled-select">
                 <select name="cpList" id="cpList"                 
                     ng-model="vm.selectedCp" 
-                    ng-change="vm.setCpSelection(selectedCp)"
-                            ng-options="cp.OmniName for cp in vm.cps track by cp.IpAddress"></select>
+                    ng-change="vm.setCpSelection(vm.selectedCp)"
+                    ng-options="cp.OmniName for cp in vm.cps track by cp.IpAddress"></select>
             </div>
             </div>            
             

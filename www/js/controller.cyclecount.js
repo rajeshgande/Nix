@@ -2,21 +2,39 @@ angular.module('nix.controllers')
 .controller('CycleCountCtrl', function($scope, httpService, $ionicPopup, $cordovaBarcodeScanner, $ionicPlatform, $window) {
 	 var vm = this;
 
-     vm.setCpSelection = function(cp) {
-            vm.selectedCp = cp; 
-            window.localStorage['SelectedCP'] = vm.selectedCp;
-            window.localStorage['omnisiteid'] = vm.selectedCp.OmniSiteId;
-            window.localStorage['omniIpAddress'] = vm.selectedCp.IpAddress;                
-     };
+    vm.setCpSelection = function(cp) {
+        vm.selectedCp = cp;
+        if (cp == null) {
+            console.log("Error: CP selection is null");
+            return;
+        }
 
-     httpService.getAllCPs().then(function(data) {
-		  vm.cps=data;
-          vm.setCpSelection(data[0]);
-         
-		});
+        // Check if new CP was picked, if not, exit.
+        if (window.localStorage['omniIpAddress'] === vm.selectedCp.IpAddress) {
+            return;
+        }
+
+        vm.refreshItem();
+        window.localStorage['SelectedCP'] = vm.selectedCp;
+        window.localStorage['omnisiteid'] = vm.selectedCp.OmniSiteId;
+        window.localStorage['omniIpAddress'] = vm.selectedCp.IpAddress;                
+    };
+
+    httpService.getAllCPs().then(function(data) {
+		vm.cps = data;
+        vm.setCpSelection(data[0]);
+    });
            
-	vm.item = { ItemId : "", FormattedGenericName : "", QuantityOnHand : "", ExpirationDate : "", Location : "", ItemBarCode : "" };
-   
+    vm.refreshItem = function() {
+        vm.item = { ItemId : "", FormattedGenericName : "", QuantityOnHand : "", ExpirationDate : "", Location : "", ItemBarCode : "" };
+
+        // Just for debugging
+        if (!$window.cordova) {
+            vm.item.ItemBarCode = '1234';
+        }
+    }; 
+    vm.refreshItem(); 
+
     vm.changeExpDateInput = function(dateType) {
         // Default first
         vm.dateShow = false;
@@ -40,8 +58,7 @@ angular.module('nix.controllers')
     vm.isRunningInBrowser = false;
     if (!$window.cordova)
     {
-        console.log("runnign in dev mode")
-        vm.item.ItemBarCode = '1234';
+        console.log("running in dev mode")
         vm.isRunningInBrowser = true;        
     }
     		 
