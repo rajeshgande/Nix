@@ -80,6 +80,8 @@ angular.module('nix.controllers')
             vm.item = data;
             vm.item.ExpirationDate = new Date(vm.item.ExpirationDate);
             vm.changeExpDateInput(data.ExpirationDateGranularity);
+        } else {
+            vm.refreshItem();
         }
     }
         
