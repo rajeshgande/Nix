@@ -1,9 +1,12 @@
 angular.module('nix.controllers')
-    .controller('LogInCtrl', function($scope, $state, auth, $rootScope, $ionicPopup) {
+    .controller('LogInCtrl', function($scope, $state, auth, $rootScope, $ionicPopup, $ionicSideMenuDelegate) {
         var vm = this;
 
         vm.user = {};
         vm.showServerAddress = false;
+        $ionicSideMenuDelegate.canDragContent(false);
+        $ionicSideMenuDelegate.edgeDragThreshold(false);
+
 
         vm.serverAddressNotPopulated = function() {
             return (window.localStorage.getItem("baseurl") == undefined || window.localStorage['baseurl'] == "") || vm.showServerAddress;
@@ -40,7 +43,11 @@ angular.module('nix.controllers')
                         $rootScope.control = {
                             isLoggedIn: true
                         };
+
                         console.log("Logging In ", vm.user);
+                        
+                        $ionicSideMenuDelegate.canDragContent(true);
+                        $ionicSideMenuDelegate.edgeDragThreshold(true);  
 
                         $state.go('menu.cyclecount');
                     },
