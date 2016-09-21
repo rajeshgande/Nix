@@ -24,11 +24,11 @@
 
              <label class="item item-borderless item-stacked-label" name="GenericName">
                     <span class="input-label">Description</span>
-                    <input type="text" placeholder="Generic Name" ng-model="vm.item.FormattedGenericName">     
+                    <div>{{vm.item.FormattedGenericName}}</div>
                 </label>
                 <label class="item item-borderless item-stacked-label" name="ItemId">
                     <span class="input-label">Item Id</span>
-                    <input type="text" placeholder="Item Id" ng-model="vm.item.ItemId">
+                    <div>{{vm.item.ItemId}}</div>
                 </label>               
                 <label class="item item-borderless item-stacked-label" name="Quantity">
                     <span class="input-label">QTY</span>
@@ -43,7 +43,7 @@
                 </label>
                 <label class="item item-borderless item-stacked-label" name="Location">
                     <span class="input-label">Location</span>
-                    <input type="text" placeholder="GenericName" ng-model="vm.item.Location">
+                    <div>{{vm.item.Location}}</div>
                 </label>
                 <!--<label class="item item-borderless item-stacked-label" name="Location">
                     <input type="submit" class="button button-block button-balanced" value="Update Quantity">
