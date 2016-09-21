@@ -62,7 +62,7 @@ angular.module('nix.controllers')
         vm.isRunningInBrowser = true;        
     }
     		 
-    vm.perfomCycleCount = function() {		 	 
+    vm.perfomCycleCount = function() {	
 		 httpService.updateQty(vm.item);
 	 };
      
