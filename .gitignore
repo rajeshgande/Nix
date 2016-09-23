@@ -9,3 +9,4 @@ plugins/
 nix.jsproj.user
 jsconfig.json
 .vscode/
+tests/coverage
