@@ -24,10 +24,14 @@ module.exports = function(config) {
       '../www/js/**/*.module.js',
       '../www/js/*.js', 
       '../www/js/**/*.js',      
-      'unit-tests/**/*.js'
+      'unit-tests/**/*.js'      
+      // 'unit-tests/login.controller.tests.js'
+      //'unit-tests/cyclecount.controller.tests.js'
     ],
 
-// 'unit-tests/login.controller.tests.js.js'
+// 'unit-tests/login.controller.tests.js'
+// 'unit-tests/cyclecount.controller.tests.js'
+
 // 'unit-tests/**/*.js'
 
     // list of files to exclude

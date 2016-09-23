@@ -9,6 +9,8 @@ describe('CycleCount Controller Tests', function(){
         mockitem,
         mockcplist;
     
+   
+
     // load the controller's module
     beforeEach(module('nix.controllers'));
 
@@ -16,16 +18,18 @@ describe('CycleCount Controller Tests', function(){
         scopeMock = $rootScope.$new();    
 
    // mocks
-   mockitem = { ItemId : "123", FormattedGenericName : "", QuantityOnHand : "10", ExpirationDate : "11/30/2016", Location : "", ItemBarCode : "1234" };
-   
    mockcplist = [
                 { name: 'cpone', IpAddress: '127.0.0.1', OmniSiteId: 'site1' }, 
                 { name: 'cptwo', IpAddress: '127.0.0.2', OmniSiteId: 'site1' }];
+    mockitem = { ItemId : "123", FormattedGenericName : "", QuantityOnHand : "10", ExpirationDate : "11/30/2016", Location : "", ItemBarCode : "1234" };
+   
+   
     httpServiceMock = {  
         getAllCPs: jasmine.createSpy('getAllCPs spy')
                         .and.callFake(function () {
                     return {
                         then: function (callback) {
+                            //controller.cps = mockcplist;
                             return callback(mockcplist);
                         } 
                     }    

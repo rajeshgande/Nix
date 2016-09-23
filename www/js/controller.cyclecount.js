@@ -2,6 +2,15 @@ angular.module('nix.controllers')
 .controller('CycleCountCtrl', function($scope, httpService, $ionicPopup, $cordovaBarcodeScanner, $ionicPlatform, $window) {
 	 var vm = this;
 
+      vm.refreshItem = function() {
+        vm.item = { ItemId : "", FormattedGenericName : "", QuantityOnHand : "", ExpirationDate : "", Location : "", ItemBarCode : "" };
+
+        // Just for debugging
+        if (!$window.cordova) {
+            vm.item.ItemBarCode = '1234';
+        }
+    }; 
+
     vm.setCpSelection = function(cp) {
         vm.selectedCp = cp;
         if (cp == null) {
@@ -25,14 +34,7 @@ angular.module('nix.controllers')
         vm.setCpSelection(data[0]);
     });
            
-    vm.refreshItem = function() {
-        vm.item = { ItemId : "", FormattedGenericName : "", QuantityOnHand : "", ExpirationDate : "", Location : "", ItemBarCode : "" };
-
-        // Just for debugging
-        if (!$window.cordova) {
-            vm.item.ItemBarCode = '1234';
-        }
-    }; 
+   
     vm.refreshItem(); 
 
     vm.changeExpDateInput = function(dateType) {

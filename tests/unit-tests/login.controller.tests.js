@@ -5,7 +5,8 @@ describe('LogIn Controller Tests', function(){
         stateMock,
         ionicPopupMock,
         scopeMock,
-        rootScopeMock;
+        rootScopeMock,
+        ionicSideMenuDelegateMock;
 
     
     // load the controller's module
@@ -33,12 +34,14 @@ describe('LogIn Controller Tests', function(){
 
         // mock $ionicPopup
         ionicPopupMock = jasmine.createSpyObj('$ionicPopup spy', ['alert']);
+        ionicSideMenuDelegateMock = jasmine.createSpyObj('$ionicSideMenuDelegate spy', ['canDragContent', 'edgeDragThreshold']);
 
         controller = $controller('LogInCtrl', { 
                             $scope: scopeMock,
                             $state: stateMock, 
                             'auth': authServiceMock,
-                            '$ionicPopup': ionicPopupMock                    
+                            '$ionicPopup': ionicPopupMock,
+                           '$ionicSideMenuDelegate': ionicSideMenuDelegateMock                  
                             } );
     }));
 
