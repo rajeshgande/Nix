@@ -39,18 +39,15 @@ angular.module('nix.controllers')
         // Default first
         vm.dateShow = false;
         vm.monthShow = false;
-        vm.datetimeShow = false;
         vm.noneDateShow = false;
 
         if (dateType == 'undefined' || dateType === "None") {
             vm.noneDateShow = true;
-        } else if (dateType == "Day") {
+        } else if (dateType == "Day" || dateType == "Time") {
             vm.dateShow = true;
         } else if (dateType == "Month") {
             vm.monthShow = true;
-        } else if (dateType == "Time") {
-            vm.datetimeShow = true;
-        }
+        }     
     };
 
     // vm.selectedCp =  JSON.parse(window.localStorage['SelectedCP']);
