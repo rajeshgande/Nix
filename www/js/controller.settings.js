@@ -1,6 +1,7 @@
 angular.module('nix.controllers')
 .controller('settingsCtrl', function($scope, httpService) {
   
+    var vm = this;
     //serverAddress
     if(window.localStorage.getItem("baseurl") == undefined || window.localStorage['baseurl'] == "") {
            window.localStorage['baseurl'] =  'https://omninix.omnicellanalytics.com:40405';
@@ -14,13 +15,13 @@ angular.module('nix.controllers')
         window.localStorage['proxycalls'] =  true;
     }
      
-    $scope.settings = {serverAddress: window.localStorage['baseurl'],
+    vm.settings = {serverAddress: window.localStorage['baseurl'],
                        demoMode : JSON.parse(window.localStorage['demoMode']),
                       // proxycalls :JSON.parse(window.localStorage['proxycalls'])
                     };
 
-    $scope.onServerAddressChange = function () {
-        window.localStorage['baseurl'] =  $scope.settings.serverAddress;
+    vm.onServerAddressChange = function () {
+        window.localStorage['baseurl'] =  vm.settings.serverAddress;
         console.log('settings - serverAddress:' + window.localStorage['baseurl']);
     };
 
@@ -28,15 +29,16 @@ angular.module('nix.controllers')
      if(window.localStorage.getItem("proxycalls") == undefined || window.localStorage['proxycalls'] == "") {
         window.localStorage['proxycalls'] =  true;
     }
-    $scope.proxycalls = { checked : window.localStorage['proxycalls']};
-    $scope.proxycalls.checked = JSON.parse(window.localStorage['proxycalls']); 
-    $scope.onProxycallsChange = function () {
-        window.localStorage['proxycalls'] = $scope.proxycalls.checked;        
+    vm.proxycalls = { checked : window.localStorage['proxycalls']};
+    vm.proxycalls.checked = JSON.parse(window.localStorage['proxycalls']); 
+    
+    vm.onProxycallsChange = function () {
+        window.localStorage['proxycalls'] = vm.proxycalls.checked;        
         console.log('settings - proxycall:' + window.localStorage['proxycalls']);
     };
 
-     $scope.onDemoModeChange = function () {
-        window.localStorage['demoMode'] = $scope.settings.demoMode;        
+     vm.onDemoModeChange = function () {
+        window.localStorage['demoMode'] = vm.settings.demoMode;        
         console.log('settings - demoMode:' + window.localStorage['demoMode']);
     };
     
