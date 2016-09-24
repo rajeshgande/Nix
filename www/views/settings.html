@@ -1,13 +1,13 @@
 <ion-view id="settingsPage" title="Settings">
-    <ion-content overflow-scroll="true" padding="true" scroll="false" class="has-header" ng-controller="CycleCountCtrl as vm">
+    <ion-content overflow-scroll="true" padding="true" scroll="false" class="has-header" ng-controller="settingsCtrl as vm">
         <form class="list">
             <ion-list>
                 <label class="item item-input item-stacked-label" name="ServerAddress">
                     <span class="input-label">ServerAddress</span>
                     <input type="text" placeholder="ServerAddress" ng-model="vm.settings.serverAddress" ng-change="vm.onServerAddressChange()">
                 </label>
-                 <ion-toggle ng-model="vm.proxycalls.checked" ng-checked="proxycalls.checked" toggle-class="toggle-assert" ng-change="vm.onProxycallsChange()">Proxy Calls</ion-toggle>
-                  <ion-toggle ng-model="vm.settings.demoMode" ng-checked="settings.demoMode" toggle-class="toggle-assert" ng-change="vm.onDemoModeChange()">Demo Mode</ion-toggle>
+                 <ion-toggle ng-model="vm.proxycalls.checked" ng-checked="vm.proxycalls.checked" toggle-class="toggle-assert" ng-change="vm.onProxycallsChange()">Proxy Calls</ion-toggle>
+                  <ion-toggle ng-model="vm.settings.demoMode" ng-checked="vm.settings.demoMode" toggle-class="toggle-assert" ng-change="vm.onDemoModeChange()">Demo Mode</ion-toggle>
                   <!--<label class="item item-input" name="Proxy Calls">
                       <span class="input-label">Proxy Calls</span>
                 <ion-toggle ng-model="proxycalls.checked" ng-checked="proxycalls.checked" toggle-class="toggle-assert" ng-change="onProxycallsChange()">Proxy Calls</ion-toggle>
