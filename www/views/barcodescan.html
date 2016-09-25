@@ -1,45 +1,45 @@
 <ion-view view-title="{{headerText}}">
    
-    <ion-content id="cycleCount"  has-header="true">
+    <ion-content id="barcodeScan" has-header="true" ng-controller="barcodeScanCtrl as vm">
         <ion-list>
             <div class="row filter">
                 <div class="col styled-select">
                 <select name="cpList" id="cpList"                 
-                    ng-model="selectedCp" 
-                    ng-change="setCpSelection(selectedCp)"
-                            ng-options="cp.OmniName for cp in cps track by cp.IpAddress"></select>
+                    ng-model="vm.selectedCp" 
+                    ng-change="vm.setCpSelection(vm.selectedCp)"
+                            ng-options="cp.OmniName for cp in vm.cps track by cp.IpAddress"></select>
             </div>
             </div>            
             
             <div id="scanDiv" class="item item-input-inset">
                 <label class="item-input-wrapper">
-                    <input type="text" placeholder="Scan Barcode"  ng-model="item.ItemBarCode" ng-enter="getitem()">
+                    <input type="text" placeholder="Scan Barcode"  ng-model="vm.item.ItemBarCode" ng-enter="vm.getitem()">
                 </label>
-                <button class="button button-small button-balanced icon ion-ios-barcode" ng-click="scan()">
+                <button class="button button-small button-balanced icon ion-ios-barcode" ng-click="vm.scan()">
                     Scan Code
                 </button>
             </div>
-            <form id="cycleCountFrom" name="cycleCountFrom" ng-submit="submitForm(item)">
+            <form id="barcodeScanForm" name="barcodeScanForm" ng-submit="vm.submitForm(item)">
 
              <label class="item item-borderless item-stacked-label" name="GenericName">
                     <span class="input-label">Description:</span>
-                    <div>{{item.FormattedGenericName}}</div>
+                    <div>{{vm.item.FormattedGenericName}}</div>
                 </label>
                 <label class="item item-borderless item-stacked-label" name="ItemId">
                     <span class="input-label">Item Id:</span>
-                    <div>{{item.ItemId}}</div>
+                    <div>{{vm.item.ItemId}}</div>
                 </label>               
                 <label class="item item-borderless item-stacked-label" name="Quantity">
                     <span class="input-label">QTY:</span>
-                    <div>{{item.QuantityOnHand}}</div>
+                    <div>{{vm.item.QuantityOnHand}}</div>
                 </label>
                 <label class="item item-borderless item-stacked-label" name="ExpirationDate">
                     <span class="input-label">EXP Date:</span>
-                    <div>{{item.ExpirationDate}}</div>
+                    <div>{{vm.item.ExpirationDate}}</div>
                 </label>
                 <label class="item item-borderless item-stacked-label" name="Location">
                     <span class="input-label">Location:</span>
-                    <div>{{item.Location}}</div>
+                    <div>{{vm.item.Location}}</div>
                 </label>
             </form>
         </ion-list>
