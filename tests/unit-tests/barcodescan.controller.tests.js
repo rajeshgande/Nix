@@ -22,13 +22,11 @@ describe('barcodeScanCtrl Controller Tests', function() {
         ];
         mockitem = { ItemId: "123", FormattedGenericName: "", QuantityOnHand: "10", ExpirationDate: "11/30/2016", Location: "", ItemBarCode: "1234" };
 
-
         httpServiceMock = {
             getAllCPs: jasmine.createSpy('getAllCPs spy')
                 .and.callFake(function() {
                     return {
                         then: function(callback) {
-                            //controller.cps = mockcplist;
                             return callback(mockcplist);
                         }
                     }
@@ -73,7 +71,6 @@ describe('barcodeScanCtrl Controller Tests', function() {
     }));
 
     it('Scan calls ionicPlatform if it is running in mobile', function() {
-        // controller.item = {ItemBarCode:"1234"};
         controller.isRunningInBrowser = false;
         controller.scan();
         expect(controller.currentlyScanning).toEqual(false);
@@ -81,5 +78,45 @@ describe('barcodeScanCtrl Controller Tests', function() {
         expect(controller.item.ItemBarCode).toEqual('1234');
         expect(httpServiceMock.getItemDetails).toHaveBeenCalled();
         expect(ionicPopupMock.alert).toHaveBeenCalled();
+    });
+
+    it('Gets cp list and sets default selection', function() {
+        expect(httpServiceMock.getAllCPs).toHaveBeenCalled();
+        expect(controller.cps.length).toEqual(2);
+        expect(controller.selectedCp.IpAddress).toEqual('127.0.0.1');
+        expect(window.localStorage['omniIpAddress']).toEqual('127.0.0.1');
+    });
+
+    it('Is Running in browser', function() {
+        expect(controller.isRunningInBrowser).toEqual(true);
+    });
+
+    it('submitForm Function Test', function() {
+        controller.submitForm();
+        expect(httpServiceMock.updateQty).toHaveBeenCalled();
+    });
+
+    it('getitem Function Test', function() {
+        controller.item = { ItemBarCode: "1234" };
+        controller.getitem();
+        expect(controller.currentlyScanning).toEqual(false);
+        expect(httpServiceMock.getItemDetails).toHaveBeenCalledWith(controller.item.ItemBarCode);
+        expect(controller.item).toEqual(mockitem);
+    });
+
+    it('Scan calls getitems if it is running in browser', function() {
+        controller.item = { ItemBarCode: "1234" };
+        controller.scan();
+        expect(controller.currentlyScanning).toEqual(false);
+        expect(httpServiceMock.getItemDetails).toHaveBeenCalledWith(controller.item.ItemBarCode);
+        expect(controller.item).toEqual(mockitem);
+    });
+
+    it('Scan calls nothing if it is already scanning', function() {
+        controller.currentlyScanning = true;
+        controller.item = { ItemBarCode: "1234" };
+        controller.scan();
+        expect(controller.currentlyScanning).toEqual(true);
+        expect(httpServiceMock.getItemDetails).not.toHaveBeenCalled();
     });
 });
