@@ -11,7 +11,9 @@ describe('Settings Controller Tests', function(){
     beforeEach(inject(function($rootScope, $controller) {        
         scopeMock = $rootScope.$new();    
 
-
+       window.localStorage['baseurl'] = "";
+       window.localStorage['proxycalls'] = "";
+       window.localStorage['demoMode'] = "";
      
 
         // mock $state
@@ -24,6 +26,12 @@ describe('Settings Controller Tests', function(){
                         } );
      
     }));
+
+     it('should set to default value', function(){
+        expect(window.localStorage['baseurl']).toEqual('https://omninix.omnicellanalytics.com:40405');
+        expect(window.localStorage['proxycalls']).toEqual('true');                
+        expect(window.localStorage['demoMode']).toEqual('true');    
+    });
     
      // OnServerAddressChanged
     it('should have server address changed', function(){       
