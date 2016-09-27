@@ -51,14 +51,17 @@ angular.module('nix.controllers')
             httpService
                 .getItemDetails(vm.item.ItemBarCode)
                 .then(function(data) {
-                    vm.item = data;
-                    vm.item.ExpirationDate = new Date(vm.item.ExpirationDate);
+                    vm.mapItemData(data);
                 });
         };
 
         vm.mapItemData = function(data) {
             if (data) {
                 vm.item = data;
+
+                if (vm.item.ExpirationDate) {
+                    vm.item.ExpirationDate = new Date(vm.item.ExpirationDate);
+                }
             } else {
                 vm.refreshItem();
             }
