@@ -77,7 +77,11 @@ angular.module('nix.controllers')
     vm.mapItemData = function(data) {
         if (data) {
             vm.item = data;
-            vm.item.ExpirationDate = new Date(vm.item.ExpirationDate);
+            
+            if (vm.item.ExpirationDate) {
+                vm.item.ExpirationDate = new Date(vm.item.ExpirationDate);
+            } 
+            
             vm.changeExpDateInput(data.ExpirationDateGranularity);
         } else {
             vm.refreshItem();
