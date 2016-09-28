@@ -1,5 +1,5 @@
 angular.module('nix.services')
-.service('auth', function($http, urls) {
+.service('auth', function($http) {
        function urlBase64Decode(str) {
            var output = str.replace('-', '+').replace('_', '/');
            switch (output.length % 4) {
@@ -40,7 +40,7 @@ angular.module('nix.services')
 	   function loginuser(loggindata, success, error) {
             $http({
 						method: 'POST',
-						url: window.localStorage.getItem("baseurl")  + urls.TOKEN_REQUEST,
+						url: window.localStorage.getItem("baseurl")  + '/oauth/token',
 						headers: {
 							'OCClientContext': '{   "ProductName" : "CP",   "PartnerProductId" : "",   "OmniCenterInstallation" : "CPC01",   "TimeStamp" : "06/26/2016 19:40:05"  }', 
 						'Content-Type': 'application/x-www-form-urlencoded'
@@ -62,9 +62,7 @@ angular.module('nix.services')
        var tokenClaims = '';//getClaimsFromToken();
 	   
        return {
-           signup: function (data, success, error) {
-               $http.post(window.localStorage.getItem("baseurl") + '/signup', data).success(success).error(error)
-           },
+           
            login: function (loggindata, success, error) {
                  loginuser(loggindata, success, error);
 				},

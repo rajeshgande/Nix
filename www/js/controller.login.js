@@ -5,6 +5,7 @@ angular.module('nix.controllers')
         vm.user = {};
         $ionicSideMenuDelegate.canDragContent(false);
         $ionicSideMenuDelegate.edgeDragThreshold(false);
+        
 
         vm.showServerAddress = window.localStorage.getItem("baseurl") == undefined || window.localStorage['baseurl'] == "";
 

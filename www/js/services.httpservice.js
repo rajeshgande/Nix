@@ -1,6 +1,6 @@
 angular.module('nix.services')
-.service('httpService', function($http, urls, $ionicPopup) {
-	 
+.service('httpService', function($http, $ionicPopup) {
+	 /*
 	 function gethospitals() {
 		 console.log("Getting Hospitals ");	
 		 var hospitals = {};
@@ -20,7 +20,7 @@ angular.module('nix.services')
 			  
 		return hospitals;   
 	};
-	
+	*/
 	function getcps() {
 		 console.log("Getting CPS ");	
 		 var cps = {};
@@ -139,9 +139,9 @@ angular.module('nix.services')
     }
 	
 	return {
-           getHospitals: function (data, success, error) {
+          /* getHospitals: function (data, success, error) {
                return gethospitals();
-			},
+			},*/
 			getAllCPs: function (data, success, error) {
                return getcps();
 			},

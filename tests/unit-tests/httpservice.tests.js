@@ -1,22 +1,8 @@
 describe('http Service Tests', function(){
   
    var service,
-        scopeMock,
-        httpServiceMock,
-        scannerMock,
-        ionicPlatformMock,
-        ionicPopupMock,
-        mockitem,
-        mockcplist;
-    
-   
-
-    // load the controller's module
-    beforeEach(module('nix.controllers'));
-
-    beforeEach(inject(function($rootScope, $controller, $q) {        
-        scopeMock = $rootScope.$new();    
-
+   urlsMock,
+        httpBackend;
    // mocks
    mockcplist = [
                 { name: 'cpone', IpAddress: '127.0.0.1', OmniSiteId: 'site1' }, 
@@ -24,110 +10,107 @@ describe('http Service Tests', function(){
     mockitem = { ItemId : "123", FormattedGenericName : "", QuantityOnHand : "10", ExpirationDate : "11/30/2016", Location : "", ItemBarCode : "1234" };
    
    
-    httpServiceMock = {  
-        getAllCPs: jasmine.createSpy('getAllCPs spy')
-                        .and.callFake(function () {
-                    return {
-                        then: function (callback) {
-                            //controller.cps = mockcplist;
-                            return callback(mockcplist);
-                        } 
-                    }    
-            }),
-        getItemDetails: jasmine.createSpy('getItemDetails spy')
-                        .and.callFake(function (barcode) {
-                    return {
-                        then: function (callback) {
-                            return callback(mockitem);
-                        } 
-                    }    
-            }),
-           updateQty : jasmine.createSpy('updateQty spy')
-        };
-    
-    ionicPopupMock = jasmine.createSpyObj('$ionicPopup spy', ['alert']);
-   
-    ionicPlatformMock = {
-        ready: function(callback){callback()}
-            };
-    
-     scannerMock = {
-         scan:jasmine.createSpy('scan spy')
-                        .and.callFake(function () {
-                    return {
-                        then: function (callback, callback2) {
-                            //callback('1234');
-                            callback2();
-                            return callback('1234');
-                        } 
-                    }    
-            }),
-     }
-     
-
-    controller = $controller('CycleCountCtrl', { 
-                        $scope: scopeMock,
-                        'httpService': httpServiceMock, 
-                        '$ionicPopup': ionicPopupMock,
-                        '$cordovaBarcodeScanner': scannerMock,
-                        '$ionicPlatform': ionicPlatformMock           
-                        } );
-    }));
-
-    it('Scan calls ionicPlatform if it is running in mobile', function(){
-        // controller.item = {ItemBarCode:"1234"};
-         controller.isRunningInBrowser = false;
-         controller.scan();      
-         expect(controller.currentlyScanning).toEqual(false);
-         expect(scannerMock.scan).toHaveBeenCalled();
-         expect(controller.item.ItemBarCode).toEqual('1234');
-         expect(httpServiceMock.getItemDetails).toHaveBeenCalled();         
-         expect(ionicPopupMock.alert).toHaveBeenCalled();
-
+     beforeEach(function (){  
+    // load the module.
+   module('nix.services', function($provide) {
+      
+      // Jasmine's createSpyObj will create an object
+      // that has spies on the specified array of properties.
+      // it's equivalent to creating an object, then adding a
+      // spy to a property, or simply spying on an existing property.
+      urlsMock = jasmine.createSpyObj('urls', ['bar']);
+      ionicPopupMock = jasmine.createSpyObj('$ionicPopup spy', ['alert']);
+      // provide the mock!
+      $provide.value('$ionicPopup', ionicPopupMock);
     });
+    
+    // get your service, also get $httpBackend
+    // $httpBackend will be a mock, thanks to angular-mocks.js
+    inject(function($httpBackend, _httpService_) {
+      service = _httpService_;      
+      httpBackend = $httpBackend;
+    });
+  });
   
-    it('Gets cp list and sets default selection', function(){
+  // make sure no expectations were missed in your tests.
+  // (e.g. expectGET or expectPOST)
+  afterEach(function() {
+    httpBackend.verifyNoOutstandingExpectation();
+    httpBackend.verifyNoOutstandingRequest();
+  });
 
-        expect(httpServiceMock.getAllCPs).toHaveBeenCalled();
-        expect(controller.cps.length).toEqual(2);
-        expect(controller.selectedCp.IpAddress).toEqual('127.0.0.1');
-        expect(window.localStorage['omniIpAddress']).toEqual('127.0.0.1');
-    }); 
+it('Get CP List', function(){
+    window.localStorage["baseurl"] = 'http://abc';
+    httpBackend.expectGET('http://abc/Cp/Cps')
+            .respond(mockcplist);
 
-    it('Is Running in browser', function(){        
-        expect(controller.isRunningInBrowser).toEqual(true);
-    });  
+    var result;
+    service.getAllCPs().then(function(data) {
+		result = data;       
+    }   
+    );;   
 
-     
-    it('PerfomCycleCount Function Test', function(){      
-        controller.perfomCycleCount();
-         expect(httpServiceMock.updateQty).toHaveBeenCalled();
-    });
+    httpBackend.flush();
 
-    it('getitem  Function Test', function(){      
-         controller.item = {ItemBarCode:"1234"};
-         controller.getitem();        
-         expect(controller.currentlyScanning).toEqual(false);
-         expect(httpServiceMock.getItemDetails).toHaveBeenCalledWith(controller.item.ItemBarCode);
-         expect(controller.item).toEqual(mockitem);
-    });  
+     expect(result).toEqual(mockcplist);
+});
 
-    it('Scan calls getitems if it is running in browser', function(){
-         controller.item = {ItemBarCode:"1234"};
-         controller.scan();      
-         expect(controller.currentlyScanning).toEqual(false);
-         expect(httpServiceMock.getItemDetails).toHaveBeenCalledWith(controller.item.ItemBarCode);
-         expect(controller.item).toEqual(mockitem);
-    });  
+it('getItemDetails', function(){
+    window.localStorage['proxycalls'] = true;
+    window.localStorage["baseurl"] = 'http://abc';
+    httpBackend.expectGET('http://abc/Proxy/Get?barcode=1234')
+            .respond(mockitem);
 
+    var result;
+    service.getItemDetails('1234').then(function(data) {
+		result = data;       
+    }
+    );;   
 
-    it('Scan calls nothing if it is already scanning', function(){  
-         controller.currentlyScanning = true;    
-         controller.item = {ItemBarCode:"1234"};
-         controller.scan();        
-         expect(controller.currentlyScanning).toEqual(true);
-         expect(httpServiceMock.getItemDetails).not.toHaveBeenCalled();
-    });  
+    httpBackend.flush();
+
+     expect(result).toEqual(mockitem);
+});
+
+it('updateQty', function(){
+   var mockitem2 = { ItemId : "123", FormattedGenericName : "", QuantityOnHand : "10", ExpirationDate : "11/30/2016", Location : "", ItemBarCode : "1234" };
+ 
+    httpBackend.when('POST', 'http://abc/Proxy/Post')
+        .respond(200, mockitem2);
+
+    window.localStorage['proxycalls'] = true;
+    window.localStorage["baseurl"] = 'http://abc';
+    httpBackend.expectPOST('http://abc/Proxy/Post');
 
    
+    var result;
+        service.updateQty(mockitem2);
+
+    httpBackend.flush();
+
+var mockitem3 = { ItemId : "", FormattedGenericName : "", QuantityOnHand : "", ExpirationDate : "", Location : "", ItemBarCode : "" };
+ 
+expect(mockitem2).toEqual(mockitem2);
+});
+
+it('updateQty eroor', function(){
+   var mockitem2 = { ItemId : "123", FormattedGenericName : "", QuantityOnHand : "10", ExpirationDate : "11/30/2016", Location : "", ItemBarCode : "1234" };
+ 
+    httpBackend.when('POST', 'http://abc/Proxy/Post')
+        .respond(500, mockitem2);
+
+    window.localStorage['proxycalls'] = true;
+    window.localStorage["baseurl"] = 'http://abc';
+    httpBackend.expectPOST('http://abc/Proxy/Post');
+
+   
+    var result;
+        service.updateQty(mockitem2);
+
+    httpBackend.flush();
+
+var mockitem3 = { ItemId : "", FormattedGenericName : "", QuantityOnHand : "", ExpirationDate : "", Location : "", ItemBarCode : "" };
+ 
+expect(mockitem2).toEqual(mockitem2);
+});
 });
