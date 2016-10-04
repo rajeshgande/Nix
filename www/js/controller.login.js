@@ -3,17 +3,13 @@ angular.module('nix.controllers')
         var vm = this;
 
         vm.user = {};
-        vm.showServerAddress = false;
         $ionicSideMenuDelegate.canDragContent(false);
         $ionicSideMenuDelegate.edgeDragThreshold(false);
 
-
-        vm.serverAddressNotPopulated = function() {
-            return (window.localStorage.getItem("baseurl") == undefined || window.localStorage['baseurl'] == "") || vm.showServerAddress;
-        }
+        vm.showServerAddress = window.localStorage.getItem("baseurl") == undefined || window.localStorage['baseurl'] == "";
 
         console.log('base url:' + window.localStorage['baseurl']);
-        if (vm.serverAddressNotPopulated()) {
+        if (vm.showServerAddress) {
             window.localStorage['baseurl'] = 'https://omninix.omnicellanalytics.com:40405';
         }
 
