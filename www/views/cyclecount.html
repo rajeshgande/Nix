@@ -19,7 +19,8 @@
                 <button class="button button-small button-balanced icon ion-ios-barcode" ng-click="vm.scan()">
                     Scan Code
                 </button>
-            </div>           
+            </div>   
+            <div ng-if="$root.hasItemData" ng-hide="myValue">        
             <form id="cycleCountFrom" name="cycleCountFrom" ng-submit="vm.perfomCycleCount()">
 
              <label class="item item-borderless item-stacked-label" name="GenericName">
@@ -48,11 +49,11 @@
                     <input type="submit" class="button button-block button-balanced" value="Update Quantity">
                 </label>-->
                </form>
+               </div>
         </ion-list>
     </ion-content>
-      <ion-footer-bar class="bar bar-footer" style="padding-top: 0px;">
-         
-                <input type="submit"form="cycleCountFrom" class="button button-block button-balanced" value="Update Quantity" style="margin-top: 8px;margin-bottom: 8px;">
-                </ion-footer-bar>
+    <ion-footer-bar ng-if="$root.hasItemData" class="bar bar-footer" style="padding-top: 0px;">
+        <input type="submit" form="cycleCountFrom" class="button button-block button-balanced" value="Update Quantity" style="margin-top: 8px;margin-bottom: 8px;">
+    </ion-footer-bar>
            
 </ion-view>

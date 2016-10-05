@@ -46,7 +46,7 @@ angular.module('nix.services')
 		return cps;   
 	};
 	
-	  function updateQty(item) {
+	  function updateQty(item, success, error) {
           
         var uri = 'http://' +  window.localStorage.getItem("omniIpAddress") + ':40407/api/items';
         var targeturl = uri;
@@ -73,25 +73,11 @@ angular.module('nix.services')
                     },
                     
                     data: cycleCount// '{ItemId:"'+ item.ItemId+'",Quantity:"'+ item.QuantityOnHand +'",ExpirationDate:"'+ item.ExpirationDate+'}'						
-                        }).then(function successCallback(response) {	
-	                        $ionicPopup.alert({
-	     							title: 'Item Updated',
-	   						});
-
-	   						// Clear out the item info
-	   						item.ItemBarCode = "";
-	   						item.ItemId = "";
-	   						item.FormattedGenericName = "";
-	   						item.QuantityOnHand = "";
-	   						item.ExpirationDate = "";
-	   						item.Location = "";
+                        }).then(function successCallback(response) {
+							success(response);	     
                     	},
                         function errorCallback(response) {
-                            $ionicPopup.alert({
-     							title: 'Item Update Unsuccessful',
-     							template: 'Please verify all your information and try again.'
-   							});
-                            console.log(response.data);
+                           error(response);
                 });
 	};
     
@@ -145,8 +131,8 @@ angular.module('nix.services')
 			getAllCPs: function (data, success, error) {
                return getcps();
 			},
-			updateQty: function (item) {
-               return updateQty(item);
+			updateQty: function (item, success, error) {
+               return updateQty(item, success, error);
 			},
             getItemDetails: function (barcode) {
                return getItemDetails(barcode);

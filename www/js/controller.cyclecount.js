@@ -1,9 +1,11 @@
 angular.module('nix.controllers')
-.controller('CycleCountCtrl', function($scope, httpService, $ionicPopup, $cordovaBarcodeScanner, $ionicPlatform, $window) {
+.controller('CycleCountCtrl', function($scope, httpService, $ionicPopup, $cordovaBarcodeScanner, $ionicPlatform, $window, $rootScope) {
 	 var vm = this;
-
-      vm.refreshItem = function() {
+     
+     vm.refreshItem = function() {
+        
         vm.item = { ItemId : "", FormattedGenericName : "", QuantityOnHand : "", ExpirationDate : "", Location : "", ItemBarCode : "" };
+        $rootScope.hasItemData = false;
 
         // Just for debugging
         if (!$window.cordova) {
@@ -62,7 +64,18 @@ angular.module('nix.controllers')
     }
     		 
     vm.perfomCycleCount = function() {	
-		 httpService.updateQty(vm.item);
+		 httpService.updateQty(vm.item, 
+         function(){
+               $ionicPopup.alert({title: 'Item Updated'});
+                vm.refreshItem();
+         },
+          function(){
+               $ionicPopup.alert({
+     							title: 'Item Update Unsuccessful',
+     							template: 'Please verify all your information and try again.'
+   							});
+         }
+         );
 	 };
      
     vm.getitem = function(){   
@@ -70,12 +83,12 @@ angular.module('nix.controllers')
         httpService
             .getItemDetails(vm.item.ItemBarCode)
             .then(function(data) {
-                vm.mapItemData(data);
+                vm.mapItemData(data);               
             }); 
     };
 
     vm.mapItemData = function(data) {
-        if (data) {
+        if (data) {             
             vm.item = data;
             
             if (vm.item.ExpirationDate) {
@@ -83,8 +96,9 @@ angular.module('nix.controllers')
             } 
             
             vm.changeExpDateInput(data.ExpirationDateGranularity);
+            $rootScope.hasItemData = true;
         } else {
-            vm.refreshItem();
+            vm.refreshItem();           
         }
     }
         
